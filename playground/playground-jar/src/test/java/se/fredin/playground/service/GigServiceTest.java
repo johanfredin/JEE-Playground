@@ -76,8 +76,8 @@ public class GigServiceTest extends ServiceTest {
 		expect(mockContactPersonRepository.getAllContacts()).andReturn(contactPersons);
 		replay(mockContactPersonRepository);
 		
-		List<ContactPerson> allGigs = contactPersonService.getAllContacts();
-		assertEquals(2, allGigs.size());
+		List<ContactPerson> allContacts = contactPersonService.getAllContacts();
+		assertEquals(3, allContacts.size());
 		verify(mockContactPersonRepository);
 	}
 

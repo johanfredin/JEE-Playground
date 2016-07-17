@@ -10,12 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Email;
-
 import se.fredin.playground.domain.IdHolder;
 
 /**
- * Domain class holding data for a {@link ContactPerson} at a {@link Venue}.
+ * Domain class holding data for a {@link ContactPerson}
  * @author PylonMusic
  *
  */
@@ -23,17 +21,17 @@ import se.fredin.playground.domain.IdHolder;
 @Table(name = "CONTACTPERSON")
 public class ContactPerson implements IdHolder {
 	
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8597280622650264264L;
+	private static final long serialVersionUID = 6757754030293161155L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="CONTACTPERSON_ID")
 	private long id;
 	
-	@Email
 	@NotNull
 	@Column(name="EMAIL")
 	private String email;
@@ -174,21 +172,5 @@ public class ContactPerson implements IdHolder {
 		setLastName(populatedContactPerson.getLastName());
 		setPhoneNr(populatedContactPerson.getPhoneNr());
 	}
-	
-	@Override
-	public String toString() {
-		char newLine = '\n';
-		return new StringBuilder().
-			append(newLine).
-			append("CONTACT-PERSON").append(newLine).
-			append("==============").append(newLine).
-			append("Contact Person Id=").append(this.id).append(newLine).
-			append("First name=").append(this.firstName).append(newLine).
-			append("Last name=").append(this.lastName).append(newLine).
-			append("email=").append(this.email).append(newLine).
-			append("Phone nr=").append(this.phoneNr).append(newLine).
-			toString();
-	}
-	
 	
 }

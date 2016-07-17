@@ -12,7 +12,6 @@ import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import se.fredin.playground.TestFixture;
 import se.fredin.playground.domain.entitiy.ContactPerson;
 import se.fredin.playground.repository.ContactPersonRepository;
 import se.fredin.playground.repository.jpa.AbstractRepositoryTest;
@@ -21,7 +20,7 @@ import se.fredin.playground.repository.jpa.AbstractRepositoryTest;
 
 @RunWith(Arquillian.class)
 @Transactional(TransactionMode.ROLLBACK)
-public class JpaVenueRepositoryIntegrationTest extends AbstractRepositoryTest<ContactPerson, ContactPersonRepository> {
+public class JpaContactPersonIntegrationTest extends AbstractRepositoryTest<ContactPerson, ContactPersonRepository> {
 
 	@Inject
 	private ContactPersonRepository contactPersonRepo;
@@ -40,12 +39,12 @@ public class JpaVenueRepositoryIntegrationTest extends AbstractRepositoryTest<Co
 
 	@Override
 	protected ContactPerson getEntity1() {
-		return TestFixture.getValidContactPerson();
+		return new ContactPerson(0, "Jon", "Doe", "jon.doe@dobi.com", "1234 531 341");
 	}
 
 	@Override
 	protected ContactPerson getEntity2() {
-		return TestFixture.getValidContactPerson(1L, "jon.doe@foo.com");
+		return new ContactPerson(1, "Jane", "Doe", "jane.doe@dobi.com", "1234 531 ");
 	}
 
 	
