@@ -5,15 +5,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<!-- This tells Spring to search for annotations in the specified package (and subpackages) -->
-	<context:component-scan base-package="com.pylonmusic.gigmanager" />
+	<context:component-scan base-package="se.fredin.playground" />
 
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	<jee:local-slsb id="venueService"
-		jndi-name="java:global/gigmanager-ear/gigmanager-jar/VenueServiceImpl"
-		business-interface="com.pylonmusic.gigmanager.services.VenueService" />
-		
-	<jee:local-slsb id="gigService"
-		jndi-name="java:global/gigmanager-ear/gigmanager-jar/GigServiceImpl"
-		business-interface="com.pylonmusic.gigmanager.services.GigService" />
+	<jee:local-slsb id="contactPersonService"
+		jndi-name="java:global/playground-ear/playground-jar/ContactPersonServiceImpl"
+		business-interface="se.fredin.playground.services.ContactPersonService" />
 </beans>

@@ -7,7 +7,7 @@
     <container qualifier="jboss" default="true">
         <configuration>
         	<!-- This tells Arquillian which JBoss configuration file to run -->
-            <property name="serverConfig">gigmanager.xml</property>
+            <property name="serverConfig">playground.xml</property>
         </configuration>
     </container>
  

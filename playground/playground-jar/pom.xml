@@ -73,12 +73,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.9.3</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<version>3.4</version>
@@ -90,19 +84,6 @@
 			<artifactId>arquillian-persistence-impl</artifactId>
 			<version>1.0.0.Alpha6</version>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- Used to persist jodatime -->
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
-			<version>5.0.0.GA</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>dom4j</artifactId>
-					<groupId>dom4j</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
