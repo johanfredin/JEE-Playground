@@ -7,20 +7,20 @@ import javax.validation.Valid;
 import se.fredin.playground.domain.entitiy.Person;
 
 /**
- * Bean class for editing a {@link Gig}
+ * Bean class for editing a {@link Person}
  * @author johan
  *
  */
-public class EditContactPersonBean {
+public class EditPersonBean {
 	
 	@Valid
 	private Person person;
 	
-	public void setContactPerson(Person person) {
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 	
-	public Person getContactPerson() {
+	public Person getPerson() {
 		return person;
 	}
 

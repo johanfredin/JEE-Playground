@@ -22,8 +22,8 @@ public class PersonTest extends TestCase {
 	
 	@Test
 	public void testConstructor() {
-		Person person = TestFixture.getValidContactPerson(1, "Jon", "Doe");
-		assertEquals("Id should be 1", 1, person.getId());
+		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "");
+		assertEquals("Id should be 0", 0, person.getId());
 		assertEquals("First name should be", "Jon", person.getFirstName());
 		assertEquals("Last name should be", "Doe", person.getLastName());
 		assertEquals("email should be", "", person.getEmail());
@@ -32,7 +32,7 @@ public class PersonTest extends TestCase {
 	
 	@Test
 	public void testRoleAndEmail() {
-		Person person = TestFixture.getValidContactPerson(1, "JonDoe@doeman.com");
+		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "");
 		assertEquals("Email should be JonDoe@doeman.com", "JonDoe@doeman.com", person.getEmail());
 	}
 	

@@ -21,11 +21,11 @@
 			<type>ejb</type>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>se.fredin.playground</groupId> -->
-<!-- 			<artifactId>playground-war</artifactId> -->
-<!-- 			<type>war</type> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>se.fredin.playground</groupId>
+			<artifactId>playground-war</artifactId>
+			<type>war</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -41,17 +41,17 @@
 					<!-- Use Java EE ear libraries as needed. Java EE ear libraries are 
 						in easy way to package any libraries needed in the ear, and automatically 
 						have any modules (EJB-JARs and WARs) use them -->
-<!-- 					<defaultLibBundleDir>lib</defaultLibBundleDir> -->
-<!-- 					<fileNameMapping>no-version</fileNameMapping> -->
-<!-- 					<modules> -->
-<!-- 						Register our War as a web module, and set the context root -->
-<!-- 						<webModule> -->
-<!-- 							<groupId>se.fredin.playground</groupId> -->
-<!-- 							<artifactId>playground-war</artifactId> -->
-<!-- 							Define the context root for the webapp -->
-<!-- 							<contextRoot>/playground</contextRoot> -->
-<!-- 						</webModule> -->
-<!-- 					</modules> -->
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<fileNameMapping>no-version</fileNameMapping>
+					<modules>
+						Register our War as a web module, and set the context root
+						<webModule>
+							<groupId>se.fredin.playground</groupId>
+							<artifactId>playground-war</artifactId>
+							Define the context root for the webapp
+							<contextRoot>/playground</contextRoot>
+						</webModule>
+					</modules>
 				</configuration>
 			</plugin>
 			<!-- The WildFly plugin deploys your ear to a local WildFly container -->

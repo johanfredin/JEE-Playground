@@ -6,11 +6,12 @@ import javax.ejb.Local;
 
 import se.fredin.playground.domain.entitiy.Person;
 
+@Local
 public interface PersonRepository extends BaseRepository<Person> {
 
 	/**
-	 * @return a {@link List} containing all {@link Gig} entities
+	 * @return a {@link List} containing all {@link Person} entities
 	 */
-	List<Person> getAllContacts();
+	List<Person> getAllPersons();
 	
 }

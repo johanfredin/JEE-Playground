@@ -15,26 +15,26 @@
 	<!--PENDING GIGS ---------------------------------------------------------------------------------------->
 	<h2 class="underline">
 		<img src="<%=request.getContextPath()%>/images/flightrequest.png">
-		<spring:message code="global.contacts"/>
+		<spring:message code="global.persons"/>
  	</h2>
  	
  	<p>
-		<a class="button" href="<%=request.getContextPath()%>/editContactPerson/0.html"><spring:message code="index.createContact"/></a>
+		<a class="button" href="<%=request.getContextPath()%>/editPerson/0.html"><spring:message code="global.createPerson"/></a>
 	</p>
 	
 	<table class="dataTable">
 		<tr>
-			<th><spring:message code="global.contact.firstName"/></th>
-			<th><spring:message code="global.contact.lastName"/></th>
-			<th><spring:message code="global.contact.email"/></th>
+			<th><spring:message code="global.person.firstName"/></th>
+			<th><spring:message code="global.person.lastName"/></th>
+			<th><spring:message code="global.person.email"/></th>
 			<th><spring:message code="global.edit"/></th>
 		</tr>
-		<c:forEach items="${contacts}" var="contact">
+		<c:forEach items="${persons}" var="person">
 			<tr>
-				<td>${contact.firstName}</td>
-				<td>${contact.lastName}</td>
-				<td>${contact.email}</td>
-				<td><a href="<%=request.getContextPath()%>/editContactPerson/${contact.id}.html"><img src="images/edit.png" ></a></td>
+				<td>${person.firstName}</td>
+				<td>${person.lastName}</td>
+				<td>${person.email}</td>
+				<td><a href="<%=request.getContextPath()%>/editPerson/${person.id}.html"><img src="images/edit.png" ></a></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import se.fredin.playground.domain.entitiy.Person;
-import se.fredin.playground.mvc.bean.EditContactPersonBean;
+import se.fredin.playground.mvc.bean.EditPersonBean;
 import se.fredin.playground.services.PersonService;
 
 @Controller
-@RequestMapping("/editContactPerson/{id}.html")
+@RequestMapping("/editPerson/{id}.html")
 public class EditContactPersonController {
 	
 	private static Logger log = Logger.getLogger(EditContactPersonController.class.getName());
@@ -32,48 +32,48 @@ public class EditContactPersonController {
 		Person person = null;
 		
 		if(id > 0) {
-			person = getContactPersonService().getEntity(id);
+			person = getPersonService().getEntity(id);
 		} else {
 			person = new Person();
 		}
 		
-		EditContactPersonBean editContactPersonBean = new EditContactPersonBean();
-		editContactPersonBean.setContactPerson(person);
-		ModelAndView mav = new ModelAndView("editContactPerson");
-		mav.addObject("editContactPersonBean", editContactPersonBean);
+		EditPersonBean eridPersonBean = new EditPersonBean();
+		eridPersonBean.setPerson(person);
+		ModelAndView mav = new ModelAndView("editPerson");
+		mav.addObject("editPersonBean", eridPersonBean);
 		return mav;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST) 
-	public ModelAndView handleSubmit(@Valid EditContactPersonBean bean, BindingResult bindingResult) {
+	public ModelAndView handleSubmit(@Valid EditPersonBean editPersonBean, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			ModelAndView mav = new ModelAndView("editContactPerson");
-			mav.addObject("editContactPersonBean", bean);
+			ModelAndView mav = new ModelAndView("editPerson");
+			mav.addObject("editPersonBean", editPersonBean);
 			for(ObjectError error : bindingResult.getAllErrors()) {
 				log.info("Error " + error.getCode() + " " + error.getDefaultMessage() + " " + error.getObjectName());
 			}
 			return mav;
 		}
 		
-		Person person = bean.getContactPerson();
-		long contactPersonId = person.getId();
+		Person person = editPersonBean.getPerson();
+		long personId = person.getId();
 		
-		if(contactPersonId > 0) {
-			Person dbGig = getContactPersonService().getEntity(contactPersonId);
-			person.copyDataFromEntity(dbGig);
-			getContactPersonService().updateEntity(dbGig);
+		if(personId > 0) {
+			Person dbPerson = getPersonService().getEntity(personId);
+			dbPerson.copyDataFromEntity(person);
+			getPersonService().updateEntity(dbPerson);
 		} else {
-			getContactPersonService().createEntity(person);
+			getPersonService().createEntity(person);
 		}
 		
 		return new ModelAndView("redirect:/index.html");
 	}
 	
-	public void setContactPersonService(PersonService personService) {
+	public void setPersonService(PersonService personService) {
 		this.personService = personService;
 	}
 	
-	public PersonService getContactPersonService() {
+	public PersonService getPersonService() {
 		return personService;
 	}
 

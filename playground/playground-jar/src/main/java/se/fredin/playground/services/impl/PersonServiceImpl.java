@@ -27,8 +27,8 @@ public class PersonServiceImpl extends AbstractServiceImpl<Person, PersonReposit
 	}
 	
 	@Override
-	public List<Person> getAllContacts() {
-		return personRepository.getAllContacts();
+	public List<Person> getAllPersons() {
+		return personRepository.getAllPersons();
 	}
 
 }

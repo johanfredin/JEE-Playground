@@ -20,20 +20,19 @@ public class IndexController  {
 
 	@RequestMapping("/index.html")
 	public ModelAndView index() {
-		List<Person> contacts = personService.getAllContacts();
+		List<Person> persons = personService.getAllPersons();
 		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("contacts", contacts);
+		mav.addObject("persons", persons);
 		return mav;
 	}
 	
-	public void setContactPersonService(PersonService personService) {
+	public void setPersonService(PersonService personService) {
 		this.personService = personService;
 	}
 	
-	public PersonService getContactPersonService() {
+	public PersonService getPersonService() {
 		return personService;
 	}
-	
 	
 	
 }

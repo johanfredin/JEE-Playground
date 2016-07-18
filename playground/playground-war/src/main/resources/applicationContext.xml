@@ -9,7 +9,7 @@
 
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	<jee:local-slsb id="contactPersonService"
-		jndi-name="java:global/playground-ear/playground-jar/ContactPersonServiceImpl"
+	<jee:local-slsb id="personService"
+		jndi-name="java:global/playground/playground-jar/PersonServiceImpl"
 		business-interface="se.fredin.playground.services.PersonService" />
 </beans>

@@ -11,7 +11,7 @@
 	<modules>
 		<module>playground-ear</module>
 		<module>playground-jar</module>
-<!-- 		<module>playground-war</module> -->
+		<module>playground-war</module>
 	</modules>
 	
 	
@@ -74,12 +74,12 @@
 				<type>ejb</type>
 			</dependency>
 			
-<!-- 			<dependency> -->
-<!-- 				<groupId>se.fredin.playground</groupId> -->
-<!-- 				<artifactId>playground-war</artifactId> -->
-<!-- 				<version>0.1-SNAPSHOT</version> -->
-<!-- 				<type>war</type> -->
-<!-- 			</dependency> -->
+			<dependency>
+				<groupId>se.fredin.playground</groupId>
+				<artifactId>playground-war</artifactId>
+				<version>0.1-SNAPSHOT</version>
+				<type>war</type>
+			</dependency>
 
 			<!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill 
 				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 

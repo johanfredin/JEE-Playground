@@ -25,20 +25,12 @@ public class TestFixture {
 	/**
 	 * @return a new {@link Person} with all fields filled in with dummy values
 	 */
-	public static Person getValidContactPerson() {
-		return getValidContactPerson(0, "Jon", "Doe", "jon.doe@dobi.com", "1234 531 341");
+	public static Person getValidPerson() {
+		return getValidPerson("Jon", "Doe", "jon.doe@dobi.com", "1234 531 341");
 	}
 	
-	public static Person getValidContactPerson(long id, String firstName, String lastName) {
-		return getValidContactPerson(id, firstName, lastName, "", "");
-	}
-	
-	public static Person getValidContactPerson(long id, String email) {
-		return getValidContactPerson(id, "", "", email, "");
-	}
-	
-	public static Person getValidContactPerson(long id, String firstName, String lastName, String email, String phoneNr) {
-		return new Person(id, firstName, lastName, email, phoneNr);
+	public static Person getValidPerson(String firstName, String lastName, String email, String phoneNr) {
+		return new Person(firstName, lastName, email, phoneNr);
 	}
 	
 	

@@ -7,12 +7,13 @@ import javax.ejb.Stateless;
 import se.fredin.playground.domain.entitiy.Person;
 import se.fredin.playground.repository.PersonRepository;
 
+@Stateless
 public class JpaPersonRepository extends JpaRepository<Person> implements PersonRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Person> getAllContacts() {
-		return em.createQuery("select c from Person c").getResultList();
+	public List<Person> getAllPersons() {
+		return em.createQuery("select p from Person p").getResultList();
 	}
 
 }

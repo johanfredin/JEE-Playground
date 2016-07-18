@@ -15,6 +15,6 @@ public interface PersonService extends ServiceBase<Person, PersonRepository> {
 	/**
 	 * @return a {@link List} containing all the {@link Gig} entities
 	 */
-	List<Person> getAllContacts();
+	List<Person> getAllPersons();
 	
 }

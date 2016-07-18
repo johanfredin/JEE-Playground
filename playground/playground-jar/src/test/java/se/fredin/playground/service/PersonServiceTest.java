@@ -73,7 +73,7 @@ public class PersonServiceTest extends ServiceTest {
 
 	@Override
 	public void testGetAll() {
-		expect(mockContactPersonRepository.getAllContacts()).andReturn(persons);
+		expect(mockContactPersonRepository.getAllPersons()).andReturn(persons);
 		replay(mockContactPersonRepository);
 		
 		List<Person> allContacts = personService.getAllContacts();
