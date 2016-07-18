@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import se.fredin.playground.domain.entitiy.Person;
 import se.fredin.playground.repository.PersonRepository;
 
-@Stateless
 public class JpaPersonRepository extends JpaRepository<Person> implements PersonRepository {
 
 	@SuppressWarnings("unchecked")

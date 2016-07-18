@@ -6,7 +6,6 @@ import javax.ejb.Local;
 
 import se.fredin.playground.domain.entitiy.Person;
 
-@Local
 public interface PersonRepository extends BaseRepository<Person> {
 
 	/**
