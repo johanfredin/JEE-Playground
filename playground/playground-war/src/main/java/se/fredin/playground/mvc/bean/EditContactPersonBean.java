@@ -4,7 +4,7 @@ package se.fredin.playground.mvc.bean;
 
 import javax.validation.Valid;
 
-import se.fredin.playground.domain.entitiy.ContactPerson;
+import se.fredin.playground.domain.entitiy.Person;
 
 /**
  * Bean class for editing a {@link Gig}
@@ -14,14 +14,14 @@ import se.fredin.playground.domain.entitiy.ContactPerson;
 public class EditContactPersonBean {
 	
 	@Valid
-	private ContactPerson contactPerson;
+	private Person person;
 	
-	public void setContactPerson(ContactPerson contactPerson) {
-		this.contactPerson = contactPerson;
+	public void setContactPerson(Person person) {
+		this.person = person;
 	}
 	
-	public ContactPerson getContactPerson() {
-		return contactPerson;
+	public Person getContactPerson() {
+		return person;
 	}
 
 }

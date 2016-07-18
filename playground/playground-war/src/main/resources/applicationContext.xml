@@ -11,5 +11,5 @@
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	<jee:local-slsb id="contactPersonService"
 		jndi-name="java:global/playground-ear/playground-jar/ContactPersonServiceImpl"
-		business-interface="se.fredin.playground.services.ContactPersonService" />
+		business-interface="se.fredin.playground.services.PersonService" />
 </beans>

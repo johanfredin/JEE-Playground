@@ -9,29 +9,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import se.fredin.playground.domain.entitiy.ContactPerson;
-import se.fredin.playground.services.ContactPersonService;
+import se.fredin.playground.domain.entitiy.Person;
+import se.fredin.playground.services.PersonService;
 
 @Controller
 public class IndexController  {
 	
 	@Inject
-	private ContactPersonService contactPersonService;
+	private PersonService personService;
 
 	@RequestMapping("/index.html")
 	public ModelAndView index() {
-		List<ContactPerson> contacts = contactPersonService.getAllContacts();
+		List<Person> contacts = personService.getAllContacts();
 		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("contacts", contacts);
 		return mav;
 	}
 	
-	public void setContactPersonService(ContactPersonService contactPersonService) {
-		this.contactPersonService = contactPersonService;
+	public void setContactPersonService(PersonService personService) {
+		this.personService = personService;
 	}
 	
-	public ContactPersonService getContactPersonService() {
-		return contactPersonService;
+	public PersonService getContactPersonService() {
+		return personService;
 	}
 	
 	

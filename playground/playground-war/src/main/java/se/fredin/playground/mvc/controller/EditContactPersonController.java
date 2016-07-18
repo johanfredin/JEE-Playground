@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import se.fredin.playground.domain.entitiy.ContactPerson;
+import se.fredin.playground.domain.entitiy.Person;
 import se.fredin.playground.mvc.bean.EditContactPersonBean;
-import se.fredin.playground.services.ContactPersonService;
+import se.fredin.playground.services.PersonService;
 
 @Controller
 @RequestMapping("/editContactPerson/{id}.html")
@@ -25,20 +25,20 @@ public class EditContactPersonController {
 	private static Logger log = Logger.getLogger(EditContactPersonController.class.getName());
 	
 	@Inject
-	private ContactPersonService contactPersonService;
+	private PersonService personService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(@PathVariable long id) {
-		ContactPerson contactPerson = null;
+		Person person = null;
 		
 		if(id > 0) {
-			contactPerson = getContactPersonService().getEntity(id);
+			person = getContactPersonService().getEntity(id);
 		} else {
-			contactPerson = new ContactPerson();
+			person = new Person();
 		}
 		
 		EditContactPersonBean editContactPersonBean = new EditContactPersonBean();
-		editContactPersonBean.setContactPerson(contactPerson);
+		editContactPersonBean.setContactPerson(person);
 		ModelAndView mav = new ModelAndView("editContactPerson");
 		mav.addObject("editContactPersonBean", editContactPersonBean);
 		return mav;
@@ -55,26 +55,26 @@ public class EditContactPersonController {
 			return mav;
 		}
 		
-		ContactPerson contactPerson = bean.getContactPerson();
-		long contactPersonId = contactPerson.getId();
+		Person person = bean.getContactPerson();
+		long contactPersonId = person.getId();
 		
 		if(contactPersonId > 0) {
-			ContactPerson dbGig = getContactPersonService().getEntity(contactPersonId);
-			contactPerson.copyDataFromEntity(dbGig);
+			Person dbGig = getContactPersonService().getEntity(contactPersonId);
+			person.copyDataFromEntity(dbGig);
 			getContactPersonService().updateEntity(dbGig);
 		} else {
-			getContactPersonService().createEntity(contactPerson);
+			getContactPersonService().createEntity(person);
 		}
 		
 		return new ModelAndView("redirect:/index.html");
 	}
 	
-	public void setContactPersonService(ContactPersonService contactPersonService) {
-		this.contactPersonService = contactPersonService;
+	public void setContactPersonService(PersonService personService) {
+		this.personService = personService;
 	}
 	
-	public ContactPersonService getContactPersonService() {
-		return contactPersonService;
+	public PersonService getContactPersonService() {
+		return personService;
 	}
 
 }
