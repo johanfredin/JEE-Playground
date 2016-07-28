@@ -8,9 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import se.fredin.playground.domain.IdHolder;
+import se.fredin.playground.validation.annotations.PhoneNumber;
 
 /**
  * Domain class holding data for a {@link Person}
@@ -19,7 +22,7 @@ import se.fredin.playground.domain.IdHolder;
  */
 @Entity
 @Table(name = "PERSON")
-public class Person implements IdHolder {
+public class Person extends AbstractEntity {
 	
 	
 	/**
@@ -32,7 +35,8 @@ public class Person implements IdHolder {
 	@Column(name="PERSON_ID")
 	private long id;
 	
-	@NotNull
+	@NotBlank
+	@Email
 	@Column(name="EMAIL")
 	private String email;
 	
@@ -42,6 +46,7 @@ public class Person implements IdHolder {
 	@Column(name="LAST_NAME")
 	private String lastName;
 	
+	@PhoneNumber
 	@Column(name="PHONE_NR")
 	private String phoneNr;
 	
@@ -176,6 +181,12 @@ public class Person implements IdHolder {
 				.append("Email=").append(this.email).append('\n')
 				.append("Phone=").append(this.phoneNr).append('\n')
 				.toString();
+	}
+
+	@Override
+	public void setRelations() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -40,7 +40,6 @@
 			<tr>
 				<th><spring:message code="global.person.firstName" /></th>
 				<td><form:input path="person.firstName"/></td>
-<%-- 				<td><form:errors path="customer.firstName" cssClass="errors" /></td> --%>
 			</tr>
 			
 			<tr>
@@ -51,11 +50,13 @@
 			<tr>
 				<th><spring:message code="global.person.email" /></th>
 				<td><form:input path="person.email"/></td>
+				<td><form:errors path="person.email" cssClass="errors" /></td> 
 			</tr>
 			
 			<tr>
 				<th><spring:message code="global.person.phone" /></th>
 				<td><form:input path="person.phoneNr"/></td>
+				<td><form:errors path="person.phoneNr" cssClass="errors" /></td> 
 			</tr>
 			
 			<tr>

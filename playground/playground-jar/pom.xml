@@ -48,6 +48,13 @@
 			<artifactId>hibernate-validator</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Used for fixing sun exception when running validation tests -->
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
+			<version>2.2</version>
+		</dependency>
 
 		<!-- Test scope dependencies -->
 		<dependency>

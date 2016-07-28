@@ -76,7 +76,7 @@ public class PersonServiceTest extends ServiceTest {
 		expect(mockContactPersonRepository.getAllPersons()).andReturn(persons);
 		replay(mockContactPersonRepository);
 		
-		List<Person> allContacts = personService.getAllContacts();
+		List<Person> allContacts = personService.getAllPersons();
 		assertEquals(3, allContacts.size());
 		verify(mockContactPersonRepository);
 	}
