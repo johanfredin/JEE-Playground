@@ -2,36 +2,30 @@ package se.fredin.playground.domain.entitiy;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import se.fredin.playground.domain.IdHolder;
-import se.fredin.playground.validation.annotations.PhoneNumber;
 
-/**
- * Domain class holding data for a {@link Person}
- * @author johan
- *
- */
 @Entity
 @Table(name = "PERSON")
 public class Person extends AbstractEntity {
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6757754030293161155L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="PERSON_ID")
 	private long id;
 	
@@ -46,9 +40,16 @@ public class Person extends AbstractEntity {
 	@Column(name="LAST_NAME")
 	private String lastName;
 	
-	@PhoneNumber
+	
 	@Column(name="PHONE_NR")
 	private String phoneNr;
+	
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="person")
+	private Address address;
+	
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="PERSON_REGISTERY_ID")
+	private PersonRegistery registery;
 	
 	/**
 	 * Default constructor
@@ -91,10 +92,23 @@ public class Person extends AbstractEntity {
 	 * @param phoneNr the phone nr of the {@link Person}
 	 */
 	public Person(String firstName, String lastName, String email, String phoneNr) {
+		this(firstName, lastName, email, phoneNr, null);
+	}
+	
+	/**
+	 * Create a new {@link Person} instance passing in all fields of this class
+	 * @param firstName the first name of the {@link Person}
+	 * @param lastName the last name of the {@link Person}
+	 * @param email the email of the {@link Person}
+	 * @param address the {@link Address} of this {@link Person}
+	 * @param phoneNr the phone nr of the {@link Person}
+	 */
+	public Person(String firstName, String lastName, String email, String phoneNr, Address address) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
 		setPhoneNr(phoneNr);
+		setAddress(address);
 	}
 	
 	@Override
@@ -107,60 +121,52 @@ public class Person extends AbstractEntity {
 		return this.id;
 	}
 
-	/**
-	 * @return the first name of this {@link Person}
-	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * @param firstName the first name of this {@link Person}
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * @return the last name of the {@link Person}
-	 */
 	public String getLastName() {
 		return lastName;
 	}
 
-	/**
-	 * @param lastName the last name of the {@link Person}
-	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	
-	/**
-	 * @return the email of the {@link Person}
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email the email of the {@link Person}
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return the phone nr of the {@link Person}
-	 */
 	public String getPhoneNr() {
 		return phoneNr;
 	}
 
-	/**
-	 * @param phoneNr the phone nr the {@link Person}
-	 */
 	public void setPhoneNr(String phoneNr) {
 		this.phoneNr = phoneNr;
+	}
+	
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
+	public Address getAddress() {
+		return address;
+	}
+	
+	public void setRegistery(PersonRegistery registery) {
+		this.registery = registery;
+	}
+	
+	public PersonRegistery getRegistery() {
+		return registery;
 	}
 	
 	@Override
@@ -171,6 +177,7 @@ public class Person extends AbstractEntity {
 		setFirstName(populaterPerson.getFirstName());
 		setLastName(populaterPerson.getLastName());
 		setPhoneNr(populaterPerson.getPhoneNr());
+		setAddress(populaterPerson.getAddress());
 	}
 	
 	@Override
@@ -185,8 +192,10 @@ public class Person extends AbstractEntity {
 
 	@Override
 	public void setRelations() {
-		// TODO Auto-generated method stub
-		
+//		getAddress().setPerson(this);
+//		for(Person person : getRegistery().getPersons()) {
+//			person.getRegistery().setPersons(persons);
+//		}
 	}
 	
 }

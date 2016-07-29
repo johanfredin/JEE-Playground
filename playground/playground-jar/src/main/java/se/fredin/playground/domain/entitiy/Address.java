@@ -1,10 +1,13 @@
 package se.fredin.playground.domain.entitiy;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -12,22 +15,14 @@ import org.hibernate.validator.constraints.NotBlank;
 import se.fredin.playground.domain.IdHolder;
 
 
-/**
- * Domain object containing data for an address for an {@link Address}
- * @author johan
- *
- */
 @Entity
 @Table(name = "ADDRESS")
 public class Address extends AbstractEntity {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2582703777627336786L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ADDRESS_ID")
 	private long id;
 	
@@ -48,6 +43,10 @@ public class Address extends AbstractEntity {
 	
 	@Column(name="COUNTRY")
 	private String country;
+	
+	@OneToOne(cascade={CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name="PERSON_ID")
+	private Person person;
 	
 	/**
 	 * Construct a new empty {@link Address} instance 
@@ -100,79 +99,52 @@ public class Address extends AbstractEntity {
 		return this.id;
 	}
 
-	/**
-	 * @return the street of the {@link Address}
-	 */
 	public String getStreet() {
 		return street;
 	}
 	
-	/**
-	 * Set the street of the {@link Address}
-	 * @param street the street of the {@link Address}
-	 */
 	public void setStreet(String street) {
 		this.street = street;
 	}
 
-	/**
-	 * Set the city
-	 * @param city
-	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 	
-	/**
-	 * @return the City
-	 */
 	public String getCity() {
 		return city;
 	}
 	
-	/**
-	 * @return the zipcode of the {@link Address}
-	 */
 	public String getZipCode() {
 		return zipCode;
 	}
 
-	/**
-	 * set the zipcode of the {@link Address}
-	 * @param zipCode the zipcode of the {@link Address}
-	 */
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 	
-	/**
-	 * @return the state/region of the {@link Address}
-	 */
 	public String getStateOrRegion() {
 		return stateOrRegion;
 	}
 
-	/**
-	 * Set the state/region of the {@link Address}
-	 * @param stateOrRegion the state/region of the {@link Address}
-	 */
 	public void setStateOrRegion(String stateOrRegion) {
 		this.stateOrRegion = stateOrRegion;
 	}
 
-	/**
-	 * @return the country where this {@link Address} is based
-	 */
 	public String getCountry() {
 		return country;
 	}
 	
-	/**
-	 * Set the country where this {@link Address} is located
-	 * @param country the country where this {@link Address} is located
-	 */
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+	
+	public Person getPerson() {
+		return person;
 	}
 	
 	@Override
@@ -191,7 +163,7 @@ public class Address extends AbstractEntity {
 
 	@Override
 	public void setRelations() {
-		
+		getPerson().setAddress(this);
 	}
 
 	@Override
@@ -203,6 +175,7 @@ public class Address extends AbstractEntity {
 		setStateOrRegion(populatedAddres.getStateOrRegion());
 		setStreet(populatedAddres.getStreet());
 		setZipCode(populatedAddres.getZipCode());
+		setPerson(populatedAddres.getPerson());
 	}
 	
 	
