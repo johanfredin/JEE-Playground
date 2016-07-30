@@ -23,5 +23,9 @@ public class EditPersonBean {
 	public Person getPerson() {
 		return person;
 	}
+	
+	public void setRelations() {
+		getPerson().setRelations();
+	}
 
 }

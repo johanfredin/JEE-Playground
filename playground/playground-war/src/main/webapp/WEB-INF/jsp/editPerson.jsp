@@ -59,6 +59,40 @@
 				<td><form:errors path="person.phoneNr" cssClass="errors" /></td> 
 			</tr>
 			
+				<!-------------------------------------------------------------------------------------------------->
+				<!------------------------------ ADDRESS ----------------------------------------------------------->
+				<!-------------------------------------------------------------------------------------------------->
+				
+				<tr>
+					<th><spring:message code="global.address.street" /></th>
+					<td><form:input path="person.address.street"/></td>
+					<td><form:errors path="person.address.street" cssClass="errors" /></td> 
+				</tr>
+				
+				<tr>
+					<th><spring:message code="global.address.zipcode" /></th>
+					<td><form:input path="person.address.zipCode"/></td>
+					<td><form:errors path="person.address.zipCode" cssClass="errors" /></td> 
+				</tr>
+				
+				<tr>
+					<th><spring:message code="global.address.city" /></th>
+					<td><form:input path="person.address.city"/></td>
+					<td><form:errors path="person.address.city" cssClass="errors" /></td> 
+				</tr>
+				
+				<tr>
+					<th><spring:message code="global.address.stateOrRegion" /></th>
+					<td><form:input path="person.address.stateOrRegion"/></td>
+					<td><form:errors path="person.address.stateOrRegion" cssClass="errors" /></td> 
+				</tr>
+				
+				<tr>
+					<th><spring:message code="global.address.country" /></th>
+					<td><form:input path="person.address.country"/></td>
+					<td><form:errors path="person.address.country" cssClass="errors" /></td> 
+				</tr>
+			
 			<tr>
 				<th></th>
 				<td>

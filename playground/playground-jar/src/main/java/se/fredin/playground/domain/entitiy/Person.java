@@ -204,8 +204,13 @@ public class Person extends AbstractEntity {
 
 	@Override
 	public void setRelations() {
-		getPet().setPerson(this);
-		getAddress().setPerson(this);
+		if(getPet() != null) {
+			getPet().setPerson(this);
+		}
+		
+		if(getAddress() != null) {
+			getAddress().setPerson(this);
+		}
 	}
 	
 }

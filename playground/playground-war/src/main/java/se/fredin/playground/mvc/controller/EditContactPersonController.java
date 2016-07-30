@@ -55,6 +55,7 @@ public class EditContactPersonController {
 			return mav;
 		}
 		
+		editPersonBean.setRelations();
 		Person person = editPersonBean.getPerson();
 		long personId = person.getId();
 		
