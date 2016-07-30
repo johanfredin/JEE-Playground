@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -47,9 +45,8 @@ public class Person extends AbstractEntity {
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="person")
 	private Address address;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="PERSON_REGISTERY_ID")
-	private PersonRegistery registery;
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="person")
+	private Pet pet;
 	
 	/**
 	 * Default constructor
@@ -104,11 +101,25 @@ public class Person extends AbstractEntity {
 	 * @param phoneNr the phone nr of the {@link Person}
 	 */
 	public Person(String firstName, String lastName, String email, String phoneNr, Address address) {
+		this(firstName, lastName, email, phoneNr, address, null);
+	}
+	
+	/**
+	 * Create a new {@link Person} instance passing in all fields of this class
+	 * @param firstName the first name of the {@link Person}
+	 * @param lastName the last name of the {@link Person}
+	 * @param email the email of the {@link Person}
+	 * @param address the {@link Address} of this {@link Person}
+	 * @param pet {@link Pet} assigned this {@link Person}
+	 * 
+	 */
+	public Person(String firstName, String lastName, String email, String phoneNr, Address address, Pet pet) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
 		setPhoneNr(phoneNr);
 		setAddress(address);
+		setPet(pet);
 	}
 	
 	@Override
@@ -161,12 +172,12 @@ public class Person extends AbstractEntity {
 		return address;
 	}
 	
-	public void setRegistery(PersonRegistery registery) {
-		this.registery = registery;
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 	
-	public PersonRegistery getRegistery() {
-		return registery;
+	public Pet getPet() {
+		return pet;
 	}
 	
 	@Override
@@ -178,6 +189,7 @@ public class Person extends AbstractEntity {
 		setLastName(populaterPerson.getLastName());
 		setPhoneNr(populaterPerson.getPhoneNr());
 		setAddress(populaterPerson.getAddress());
+		setPet(populaterPerson.getPet());
 	}
 	
 	@Override
@@ -192,10 +204,8 @@ public class Person extends AbstractEntity {
 
 	@Override
 	public void setRelations() {
-//		getAddress().setPerson(this);
-//		for(Person person : getRegistery().getPersons()) {
-//			person.getRegistery().setPersons(persons);
-//		}
+		getPet().setPerson(this);
+		getAddress().setPerson(this);
 	}
 	
 }

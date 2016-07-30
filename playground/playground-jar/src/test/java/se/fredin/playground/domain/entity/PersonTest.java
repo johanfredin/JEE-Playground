@@ -15,7 +15,10 @@ import javax.validation.Validator;
 import org.junit.Test;
 
 import se.fredin.playground.TestFixture;
+import se.fredin.playground.domain.entitiy.Address;
 import se.fredin.playground.domain.entitiy.Person;
+import se.fredin.playground.domain.entitiy.Pet;
+import se.fredin.playground.domain.entitiy.PetType;
 
 public class PersonTest {
 	
@@ -31,7 +34,7 @@ public class PersonTest {
 	
 	@Test
 	public void testConstructor() {
-		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "", null);
+		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "", null, null);
 		assertEquals("Id should be 0", 0, person.getId());
 		assertEquals("First name should be", "Jon", person.getFirstName());
 		assertEquals("Last name should be", "Doe", person.getLastName());
@@ -41,8 +44,11 @@ public class PersonTest {
 	
 	@Test
 	public void testRoleAndEmail() {
-		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "", null);
+		Pet pet = TestFixture.getValidPet();
+		Address address = TestFixture.getValidAddress();
+		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "", address, pet);
 		assertEquals("Email should be JonDoe@doeman.com", "JonDoe@doeman.com", person.getEmail());
+		assertEquals("Pet type should be CAT", PetType.DOG, person.getPet().getType());
 	}
 	
 	@Test
@@ -51,9 +57,9 @@ public class PersonTest {
 		Person person = TestFixture.getValidPerson();
 		person.setEmail("");
 		person.setPhoneNr("abct");
-//		Validator validator = getValidator();
-//		Set<ConstraintViolation<Person>> violations = validator.validate(person);
-//		assertFalse(violations.isEmpty());
+		Validator validator = getValidator();
+		Set<ConstraintViolation<Person>> violations = validator.validate(person);
+		assertFalse(violations.isEmpty());
 	}
 	
 	protected Validator getValidator() {
