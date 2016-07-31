@@ -2,6 +2,8 @@ package se.fredin.playground.domain.entitiy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +14,7 @@ import javax.persistence.Table;
 import se.fredin.playground.domain.IdHolder;
 
 @Entity
-@Table(name="PERSON_REGISTERY")
+@Table(name="PET")
 public class Pet extends AbstractEntity {
 
 	private static final long serialVersionUID = -6618814214423296662L;
@@ -27,6 +29,7 @@ public class Pet extends AbstractEntity {
 	private Person person;
 	
 	@Column(name="Type")
+	@Enumerated(EnumType.STRING)
 	private PetType type;
 	
 	private String name;
@@ -84,6 +87,7 @@ public class Pet extends AbstractEntity {
 
 	@Override
 	public void setRelations() {
+		getPerson().setPet(this);
 	}
 
 }

@@ -24,8 +24,4 @@ public class EditPersonBean {
 		return person;
 	}
 	
-	public void setRelations() {
-		getPerson().setRelations();
-	}
-
 }

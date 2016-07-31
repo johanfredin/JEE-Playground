@@ -29,13 +29,10 @@
 	<form:form commandName="editPersonBean">
 		<form:hidden path="person.id"/>
 		<table class="formTable">
-			<c:if test="${editPersonBean.person.id > 0}">
-			<tr>
-				<th><spring:message code="global.id" /></th>
-				<td>${editPersonBean.person.id}</td>
-				<td></td>
-			</tr>
-			</c:if>
+			
+			<!------------------------------------------------------------------------------------------------------>
+			<!------------------------------ PERSON ---------------------------------------------------------------->
+			<!------------------------------------------------------------------------------------------------------>
 			
 			<tr>
 				<th><spring:message code="global.person.firstName" /></th>
@@ -92,7 +89,31 @@
 					<td><form:input path="person.address.country"/></td>
 					<td><form:errors path="person.address.country" cssClass="errors" /></td> 
 				</tr>
-			
+				
+				<!-------------------------------------------------------------------------------------------------->
+				<!------------------------------ PET --------------------------------------------------------------->
+				<!-------------------------------------------------------------------------------------------------->
+				
+				<tr>
+					<th><spring:message code="global.pet.name" /></th>
+					<td><form:input path="person.pet.name"/></td>
+					<td><form:errors path="person.pet.name" cssClass="errors" /></td> 
+				</tr>
+				
+				<tr>
+					<th><spring:message code="global.pet.type" /></th>
+					<td>
+						<form:select path="person.pet.type">
+							<form:options/>	
+						</form:select>
+					</td>
+					<td><form:errors path="person.pet.type" cssClass="errors" /></td> 
+				</tr>
+				
+			<!------------------------------------------------------------------------------------------------------>
+			<!------------------------------ END ------------------------------------------------------------------->
+			<!------------------------------------------------------------------------------------------------------>
+				
 			<tr>
 				<th></th>
 				<td>

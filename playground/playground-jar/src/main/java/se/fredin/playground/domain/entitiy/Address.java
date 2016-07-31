@@ -1,6 +1,5 @@
 package se.fredin.playground.domain.entitiy;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +43,7 @@ public class Address extends AbstractEntity {
 	@Column(name="COUNTRY")
 	private String country;
 	
-	@OneToOne(cascade={CascadeType.MERGE, CascadeType.REFRESH})
+	@OneToOne
 	@JoinColumn(name="PERSON_ID")
 	private Person person;
 	
@@ -177,7 +176,6 @@ public class Address extends AbstractEntity {
 		setZipCode(populatedAddres.getZipCode());
 		setPerson(populatedAddres.getPerson());
 	}
-	
 	
 
 }

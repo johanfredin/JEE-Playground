@@ -5,6 +5,7 @@ package se.fredin.playground.domain.entitiy;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,14 +39,13 @@ public class Person extends AbstractEntity {
 	@Column(name="LAST_NAME")
 	private String lastName;
 	
-	
 	@Column(name="PHONE_NR")
 	private String phoneNr;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="person")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
 	private Address address;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="person")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
 	private Pet pet;
 	
 	/**

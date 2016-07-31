@@ -20,9 +20,9 @@ import se.fredin.playground.services.PersonService;
 
 @Controller
 @RequestMapping("/editPerson/{id}.html")
-public class EditContactPersonController {
+public class EditPersonController {
 	
-	private static Logger log = Logger.getLogger(EditContactPersonController.class.getName());
+	private static Logger log = Logger.getLogger(EditPersonController.class.getName());
 	
 	@Inject
 	private PersonService personService;
@@ -55,8 +55,8 @@ public class EditContactPersonController {
 			return mav;
 		}
 		
-		editPersonBean.setRelations();
 		Person person = editPersonBean.getPerson();
+		person.setRelations();
 		long personId = person.getId();
 		
 		if(personId > 0) {
