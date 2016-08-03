@@ -17,4 +17,9 @@ public interface PersonService extends ServiceBase<Person, PersonRepository> {
 	 */
 	List<Person> getAllPersons();
 	
+	/**
+	 * @param firstName the firstname to compare to
+	 * @return a list with all persons whose first name is like passed in firstName
+	 */
+	List<Person> getAllPersonsWithFirstNameLike(String firstName);
 }

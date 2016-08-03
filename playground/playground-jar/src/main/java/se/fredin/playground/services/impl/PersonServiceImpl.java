@@ -31,4 +31,9 @@ public class PersonServiceImpl extends AbstractServiceImpl<Person, PersonReposit
 		return personRepository.getAllPersons();
 	}
 
+	@Override
+	public List<Person> getAllPersonsWithFirstNameLike(String firstName) {
+		return personRepository.getAllPersonsWithFirstNameLike(firstName);
+	}
+
 }

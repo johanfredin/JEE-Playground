@@ -32,6 +32,7 @@ public class Pet extends AbstractEntity {
 	@Enumerated(EnumType.STRING)
 	private PetType type;
 	
+	@Column(name="NAME")
 	private String name;
 	
 	public Pet() {}

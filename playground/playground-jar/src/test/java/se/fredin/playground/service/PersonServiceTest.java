@@ -8,7 +8,10 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Test;
 
 import se.fredin.playground.MockUtils;
 import se.fredin.playground.domain.entitiy.Person;
@@ -78,6 +81,16 @@ public class PersonServiceTest extends ServiceTest {
 		
 		List<Person> allContacts = personService.getAllPersons();
 		assertEquals(3, allContacts.size());
+		verify(mockContactPersonRepository);
+	}
+	
+	@Test
+	public void testGetPersonWithFirstNameMatch() {
+		List<Person> expectedResultOfQueryList = Arrays.asList(new Person[]{person});
+		expect(mockContactPersonRepository.getAllPersonsWithFirstNameLike("Jo")).andReturn(expectedResultOfQueryList).times(1);
+		replay(mockContactPersonRepository);
+		
+		personService.getAllPersonsWithFirstNameLike("Jo");
 		verify(mockContactPersonRepository);
 	}
 

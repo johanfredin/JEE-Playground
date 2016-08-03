@@ -14,4 +14,9 @@ public interface PersonRepository extends BaseRepository<Person> {
 	 */
 	List<Person> getAllPersons();
 	
+	/**
+	 * @param firstName the firstname to compare to
+	 * @return a list with all persons whose first name is like passed in firstName
+	 */
+	List<Person> getAllPersonsWithFirstNameLike(String firstName);
 }

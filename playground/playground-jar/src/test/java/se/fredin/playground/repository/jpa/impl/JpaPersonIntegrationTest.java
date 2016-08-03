@@ -30,6 +30,15 @@ public class JpaPersonIntegrationTest extends AbstractRepositoryTest<Person, Per
 		getRepository().persist(getEntity2());
 		assertEquals("Amount of contacts should now be 2", 2, getRepository().getAllPersons().size());
 	}
+	
+	@Test
+	public void testGetFirstNameMatch() {
+		Person joe = getEntity1();
+		Person jane = getEntity2();
+		getRepository().persist(joe);
+		getRepository().persist(jane);
+		assertEquals("Finding a person with a name like Jo should result in 1 match", 1, getRepository().getAllPersonsWithFirstNameLike("Jo").size());
+	}
 
 	@Override
 	protected PersonRepository getRepository() {

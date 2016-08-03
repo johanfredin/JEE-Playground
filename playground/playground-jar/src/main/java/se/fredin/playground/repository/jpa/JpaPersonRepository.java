@@ -15,5 +15,11 @@ public class JpaPersonRepository extends JpaRepository<Person> implements Person
 	public List<Person> getAllPersons() {
 		return em.createQuery("select p from Person p").getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Person> getAllPersonsWithFirstNameLike(String firstName) {
+		return em.createNativeQuery("select * from PERSON where FIRST_NAME like '" + firstName + "%'").getResultList();
+	}
 
 }
