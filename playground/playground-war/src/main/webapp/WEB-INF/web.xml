@@ -9,7 +9,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:/applicationContext.xml
-		</param-value>
+		</param-value> 
 	</context-param>
 	
 	<listener>
@@ -28,7 +28,7 @@
 
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	

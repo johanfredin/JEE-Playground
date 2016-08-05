@@ -8,6 +8,31 @@
 <head>
 <title><spring:message code="global.createPerson" /></title>
 <link href="<%=request.getContextPath()%>/style/common.css"	type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.1.js"></script>
+	
+<script type="text/javascript">
+
+	function doSearch() {
+ 		$.getJSON(
+ 			"<%=request.getContextPath()%>" + "/getMatchingFirstName", 
+ 			{ FIRST_NAMES : $('#searchBox').val()}, 
+
+			function(data) {
+
+				// Clear the div first
+				$("#results").text("");
+
+				for(var index in data) {
+					$("#results").append(data[index]);	
+				}
+				
+			}
+ 		);	
+	}
+		
+		
+	
+</script>
 
 </head>
 <body>
@@ -25,7 +50,6 @@
 		</c:otherwise>
 	</c:choose>
 	</h2>
-
 	<form:form commandName="editPersonBean">
 		<form:hidden path="person.id"/>
 		<table class="formTable">
@@ -35,8 +59,8 @@
 			<!------------------------------------------------------------------------------------------------------>
 			
 			<tr>
-				<th><spring:message code="global.person.firstName" /></th>
-				<td><form:input path="person.firstName"/></td>
+				<th><spring:message code="global.person.firstName"/></th>
+				<td><form:input path="person.firstName" onkeyup="doSearch()" id="searchBox"/></td>
 			</tr>
 			
 			<tr>
@@ -113,7 +137,7 @@
 			<!------------------------------------------------------------------------------------------------------>
 			<!------------------------------ END ------------------------------------------------------------------->
 			<!------------------------------------------------------------------------------------------------------>
-				
+			
 			<tr>
 				<th></th>
 				<td>
@@ -125,5 +149,9 @@
 			</tr>
 			</table>
 			</form:form>
+			
+			<div id="results">
+				Results will appear here...
+			</div>
 </body>
 </html>

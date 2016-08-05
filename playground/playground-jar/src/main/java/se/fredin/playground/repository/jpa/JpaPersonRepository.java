@@ -22,4 +22,10 @@ public class JpaPersonRepository extends JpaRepository<Person> implements Person
 		return em.createNativeQuery("select * from PERSON where FIRST_NAME like '" + firstName + "%'").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getAllFirstNamesLike(String firstName) {
+		return em.createNativeQuery("select FIRST_NAME from PERSON where FIRST_NAME like '" + firstName + "%'").getResultList();
+	}
+
 }

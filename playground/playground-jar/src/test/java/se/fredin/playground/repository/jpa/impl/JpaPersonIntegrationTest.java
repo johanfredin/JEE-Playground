@@ -3,6 +3,8 @@ package se.fredin.playground.repository.jpa.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.junit.Arquillian;
@@ -38,6 +40,18 @@ public class JpaPersonIntegrationTest extends AbstractRepositoryTest<Person, Per
 		getRepository().persist(joe);
 		getRepository().persist(jane);
 		assertEquals("Finding a person with a name like Jo should result in 1 match", 1, getRepository().getAllPersonsWithFirstNameLike("Jo").size());
+	}
+	
+	@Test
+	public void testGetFirstNameAsStringListMatch() {
+		Person joe = getEntity1();
+		Person jane = getEntity2();
+		getRepository().persist(joe);
+		getRepository().persist(jane);
+		
+		List<String> result = getRepository().getAllFirstNamesLike("Jo");
+		assertEquals("Size should be 1", 1, result.size());
+		assertEquals("Entry should be Jon", "Jon", result.get(0));
 	}
 
 	@Override

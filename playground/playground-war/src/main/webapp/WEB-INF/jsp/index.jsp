@@ -19,7 +19,7 @@
  	</h2>
  	
  	<p>
-		<a class="button" href="<%=request.getContextPath()%>/editPerson/0.html"><spring:message code="global.createPerson"/></a>
+		<a class="button" href="<%=request.getContextPath()%>/editAjaxPerson/0.html"><spring:message code="global.createPerson"/></a>
 	</p>
 	
 	<table class="dataTable">
@@ -34,7 +34,7 @@
 				<td>${person.firstName}</td>
 				<td>${person.lastName}</td>
 				<td>${person.email}</td>
-				<td><a href="<%=request.getContextPath()%>/editPerson/${person.id}.html"><img src="images/edit.png" ></a></td>
+				<td><a href="<%=request.getContextPath()%>/editAjaxPerson/${person.id}.html"><img src="images/edit.png" ></a></td>
 			</tr>
 		</c:forEach>
 	</table>
