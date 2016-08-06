@@ -67,5 +67,4 @@ public class PersonTest {
 		return configure.buildValidatorFactory().getValidator();
 	}
 	
-	
 }

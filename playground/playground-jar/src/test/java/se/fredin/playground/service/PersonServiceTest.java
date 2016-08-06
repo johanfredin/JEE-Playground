@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import se.fredin.playground.MockUtils;
+import se.fredin.playground.TestFixture;
 import se.fredin.playground.domain.entitiy.Person;
 import se.fredin.playground.repository.PersonRepository;
 import se.fredin.playground.services.PersonService;
@@ -29,7 +29,7 @@ public class PersonServiceTest extends ServiceTest {
 	
 	@Override
 	public void setupMock() {
-		persons = MockUtils.getMockedContacts();
+		persons = TestFixture.getValidPersons();
 		person = persons.get(0);
 		mockContactPersonRepository = createStrictMock(PersonRepository.class);
 		personService.setRepository(mockContactPersonRepository);

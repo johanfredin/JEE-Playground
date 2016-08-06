@@ -3,6 +3,16 @@ package se.fredin.playground.domain;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+import se.fredin.playground.domain.entitiy.AbstractEntity;
+import se.fredin.playground.domain.entitiy.Address;
+import se.fredin.playground.domain.entitiy.Person;
+import se.fredin.playground.domain.entitiy.Pet;
+
 /**
  * An interface for all entities that can return a long ID. This is supposed to
  * be done by every JPA entity.
@@ -13,6 +23,13 @@ import java.io.Serializable;
  * @param <E>
  * 
  */
+@JsonTypeInfo(use=Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="type")
+@JsonSubTypes({
+	 @Type(value=AbstractEntity.class),
+	 @Type(value=Address.class),
+	 @Type(value=Person.class),
+	 @Type(value=Pet.class)
+})
 public interface IdHolder extends Serializable {
 	
 	/**

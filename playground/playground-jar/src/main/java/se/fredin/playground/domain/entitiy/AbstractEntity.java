@@ -4,6 +4,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import se.fredin.playground.domain.IdHolder;
 
 public abstract class AbstractEntity implements IdHolder {
@@ -42,6 +44,7 @@ public abstract class AbstractEntity implements IdHolder {
 	/**
 	 * @return <code>true</code> if {@link #getId()} > 0
 	 */
+	@JsonIgnore
 	public boolean isExistingEntity() {
 		return isExistingEntity(getId());
 	}
@@ -50,6 +53,7 @@ public abstract class AbstractEntity implements IdHolder {
 	 * @param id
 	 * @return <code>true</code> if passed in id > 0
 	 */
+	@JsonIgnore
 	public boolean isExistingEntity(long id) {
 		return id > 0;
 	}
