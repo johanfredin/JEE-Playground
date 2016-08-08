@@ -7,30 +7,52 @@
 <html>
 <head>
 <title><spring:message code="global.createPerson" /></title>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
+
 <link href="<%=request.getContextPath()%>/style/common.css"	type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.1.js"></script>
 	
 <script type="text/javascript">
 
-	function doSearch() {
- 		$.getJSON(
- 			"<%=request.getContextPath()%>" + "/getMatchingFirstName", 
- 			{ FIRST_NAMES : $('#searchBox').val()}, 
+	$(document).ready(function() {
 
-			function(data) {
-
-				// Clear the div first
-				$("#results").text("");
-
-				for(var index in data) {
-					$("#results").append(data[index]);	
-				}
-				
+		$('#searchBox').autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					url : "<%=request.getContextPath()%>" + "/getMatchingFirstName",
+					method: 'get',
+					contentType: "application/json;charset=utf-8",
+					data: JSON.stringify({ FIRST_NAMES : $('#searchBox').val()}),
+					dataType: "get",
+					success: function(data) {
+						response(data);
+					},
+					error: function(err) {
+						alert(err);
+					}
+				});
 			}
- 		);	
-	}
-		
-		
+		});
+
+// 		function doSearch() {
+// 	 		$.getJSON(
+<%-- 	 			"<%=request.getContextPath()%>" + "/getMatchingFirstName",  --%>
+// 	 			{ FIRST_NAMES : $('#searchBox').val()}, 
+
+// 				function(data) {
+
+// 					// Clear the div first
+// 					$("#results").text("");
+
+// 					for(var index in data) {
+// 						$("#results").append(data[index]);	
+// 					}
+					
+// 				}
+// 	 		);	
+// 		}
+
+	});	
 	
 </script>
 
@@ -60,7 +82,7 @@
 			
 			<tr>
 				<th><spring:message code="global.person.firstName"/></th>
-				<td><form:input path="person.firstName" onkeyup="doSearch()" id="searchBox"/></td>
+				<td><form:input path="person.firstName" id="searchBox"/></td>
 			</tr>
 			
 			<tr>
