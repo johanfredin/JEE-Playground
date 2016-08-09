@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import se.fredin.playground.domain.IdHolder;
 
 @Entity
@@ -43,8 +45,10 @@ public class Person extends AbstractEntity {
 	private String phoneNr;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
+	@JsonManagedReference
 	private Address address;
 	
+	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
 	private Pet pet;
 	

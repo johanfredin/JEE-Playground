@@ -80,7 +80,7 @@ public class PersonServiceTest extends ServiceTest {
 		replay(mockContactPersonRepository);
 		
 		List<Person> allContacts = personService.getAllPersons();
-		assertEquals(3, allContacts.size());
+		assertEquals(2, allContacts.size());
 		verify(mockContactPersonRepository);
 	}
 	

@@ -15,36 +15,24 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		var key;
-		var val;
-		var name;
-		var email;
-		var email_idx = 1;
-		var name_idx = 2;
 		$("#searchBox").autocomplete({
 	        minLength: 1,
 	        delay: 500,
 	        //define callback to format results
 	        source: function (request, response) {
 	            $.getJSON("<%=request.getContextPath()%>/getMatchingFirstName", request, function(result) {
-	                response($.map(result, function(item, i) {
-	                	key = $.makeArray(item);
-	                	val = $.makeArray(key[1]);
-	              		name = val[name_idx];
-	              		email= val[email_idx];
-	                	console.log("name=" + name + ", email=" + email);
+	                response($.map(result, function(item) {
+	                	console.log("name=" + item.firstName + ", email=" + item.email);
 	                    return {
-	                    	
 	                        // following property gets displayed in drop down
-	                        label: name + " (" + email + ")",
+	                        label: item.firstName + " (" + item.email + ")",
 	                        // following property gets entered in the textbox
-	                        value: name,
+	                        value: item.firstName,
 	                        // following property is added for our own use
-	                     
 	                    }
 	                }));
 	            });
-	        }
+	        }	 
 		});
 	});	
 	
@@ -136,7 +124,7 @@
 				
 				<tr>
 					<th><spring:message code="global.pet.name" /></th>
-					<td><form:input path="person.pet.name"/></td>
+					<td><form:input path="person.pet.name" id="petName"/></td>
 					<td><form:errors path="person.pet.name" cssClass="errors" /></td> 
 				</tr>
 				

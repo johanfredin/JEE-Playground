@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import se.fredin.playground.domain.IdHolder;
 
 @Entity
@@ -26,6 +28,7 @@ public class Pet extends AbstractEntity {
 	
 	@OneToOne
 	@JoinColumn(name="PERSON_ID")
+	@JsonBackReference
 	private Person person;
 	
 	@Column(name="Type")

@@ -39,19 +39,20 @@ public class JpaPersonIntegrationTest extends AbstractRepositoryTest<Person, Per
 		Person jane = getEntity2();
 		getRepository().persist(joe);
 		getRepository().persist(jane);
-		assertEquals("Finding a person with a name like Jo should result in 1 match", 1, getRepository().getAllPersonsWithFirstNameLike("Jo").size());
+		List<Person> result = getRepository().getAllPersonsWithFirstNameLike("Jo");
+		assertEquals("Finding a person with a name like Jo should result in 1 match", 1, result.size());
 	}
 	
 	@Test
-	public void testGetFirstNameAsStringListMatch() {
+	public void testGetFirstNamesLimitedMatch() {
 		Person joe = getEntity1();
 		Person jane = getEntity2();
 		getRepository().persist(joe);
 		getRepository().persist(jane);
-		
-		List<String> result = getRepository().getAllFirstNamesLike("Jo");
-		assertEquals("Size should be 1", 1, result.size());
-		assertEquals("Entry should be Jon", "Jon", result.get(0));
+		List<Person> limitedResult = getRepository().getAllPersonsWithFirstNameLike("J", 1);
+		assertEquals("Finding a person with a name like J with a limited result to 1 should result in 1 match", 1, limitedResult.size());
+		List<Person> standardResult = getRepository().getAllPersonsWithFirstNameLike("J");
+		assertEquals("Finding a person with a name like J with a standard result should result in 2 matches", 2, standardResult.size());
 	}
 
 	@Override

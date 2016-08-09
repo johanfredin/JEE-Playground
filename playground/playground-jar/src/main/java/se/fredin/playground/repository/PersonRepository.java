@@ -22,7 +22,9 @@ public interface PersonRepository extends BaseRepository<Person> {
 	
 	/**
 	 * @param firstName the firstname to compare to
+	 * @param maxResults the max amount to return
 	 * @return a list with all persons whose first name is like passed in firstName
 	 */
-	List<String> getAllFirstNamesLike(String firstName);
+	List<Person> getAllPersonsWithFirstNameLike(String firstName, int maxResults);
+	
 }

@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import se.fredin.playground.domain.IdHolder;
 
 
@@ -45,6 +47,7 @@ public class Address extends AbstractEntity {
 	
 	@OneToOne
 	@JoinColumn(name="PERSON_ID")
+	@JsonBackReference
 	private Person person;
 	
 	/**

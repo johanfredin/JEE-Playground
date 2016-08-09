@@ -79,11 +79,9 @@ public class EditPersonAjaxController {
 	
 	@RequestMapping(value="/getMatchingFirstName", method=RequestMethod.GET)
 	public @ResponseBody List<Person> getMatchingFirstNames(@RequestParam("term") String query) {
-		List<Person> names = getPersonService().getAllPersonsWithFirstNameLike(query);
-		return names;
+		List<Person> result = getPersonService().getAllPersonsWithFirstNameLike(query);
+		return result;
 	}
-	
-	
 	
 	public void setPersonService(PersonService personService) {
 		this.personService = personService;

@@ -9,6 +9,8 @@ import se.fredin.playground.domain.IdHolder;
  */
 public interface BaseRepository<E extends IdHolder> {
 	
+	final int MAX_RESULTS = 5;
+	
 	/**
 	 * Create a new {@link IdHolder} and store in database
 	 * @param entity the {@link IdHolder} to create
