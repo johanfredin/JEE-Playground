@@ -77,11 +77,13 @@ public class EditPersonAjaxController {
 		return new ModelAndView("redirect:/index.html");
 	}
 	
-	@RequestMapping(value="/getMatchingFirstName", produces="application/json", method=RequestMethod.GET)
-	public @ResponseBody List<Person> getMatchingFirstNames(@RequestParam("FIRST_NAMES") String firstName) {
-		List<Person> names = getPersonService().getAllPersonsWithFirstNameLike(firstName);
+	@RequestMapping(value="/getMatchingFirstName", method=RequestMethod.GET)
+	public @ResponseBody List<Person> getMatchingFirstNames(@RequestParam("term") String query) {
+		List<Person> names = getPersonService().getAllPersonsWithFirstNameLike(query);
 		return names;
 	}
+	
+	
 	
 	public void setPersonService(PersonService personService) {
 		this.personService = personService;

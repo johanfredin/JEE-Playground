@@ -15,43 +15,35 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-
-		$('#searchBox').autocomplete({
-			source : function(request, response) {
-				$.ajax({
-					url : "<%=request.getContextPath()%>" + "/getMatchingFirstName",
-					method: 'get',
-					contentType: "application/json;charset=utf-8",
-					data: JSON.stringify({ FIRST_NAMES : $('#searchBox').val()}),
-					dataType: "get",
-					success: function(data) {
-						response(data);
-					},
-					error: function(err) {
-						alert(err);
-					}
-				});
-			}
+		var x;
+		var y;
+		var name;
+		var email;
+		$("#searchBox").autocomplete({
+	        minLength: 1,
+	        delay: 500,
+	        //define callback to format results
+	        source: function (request, response) {
+	            $.getJSON("<%=request.getContextPath()%>/getMatchingFirstName", request, function(result) {
+	                response($.map(result, function(item, i) {
+	                	x = $.makeArray(item);
+	                	y = $.makeArray(x[1]);
+	              		name = y[2];
+	              		email= y[1];
+	                	console.log(y);
+	                    return {
+	                    	
+	                        // following property gets displayed in drop down
+	                        label: name + " (" + email + ")",
+	                        // following property gets entered in the textbox
+	                        value: name,
+	                        // following property is added for our own use
+	                     
+	                    }
+	                }));
+	            });
+	        }
 		});
-
-// 		function doSearch() {
-// 	 		$.getJSON(
-<%-- 	 			"<%=request.getContextPath()%>" + "/getMatchingFirstName",  --%>
-// 	 			{ FIRST_NAMES : $('#searchBox').val()}, 
-
-// 				function(data) {
-
-// 					// Clear the div first
-// 					$("#results").text("");
-
-// 					for(var index in data) {
-// 						$("#results").append(data[index]);	
-// 					}
-					
-// 				}
-// 	 		);	
-// 		}
-
 	});	
 	
 </script>
@@ -172,8 +164,5 @@
 			</table>
 			</form:form>
 			
-			<div id="results">
-				Results will appear here...
-			</div>
 </body>
 </html>
