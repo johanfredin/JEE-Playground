@@ -15,10 +15,12 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		var x;
-		var y;
+		var key;
+		var val;
 		var name;
 		var email;
+		var email_idx = 1;
+		var name_idx = 2;
 		$("#searchBox").autocomplete({
 	        minLength: 1,
 	        delay: 500,
@@ -26,11 +28,11 @@
 	        source: function (request, response) {
 	            $.getJSON("<%=request.getContextPath()%>/getMatchingFirstName", request, function(result) {
 	                response($.map(result, function(item, i) {
-	                	x = $.makeArray(item);
-	                	y = $.makeArray(x[1]);
-	              		name = y[2];
-	              		email= y[1];
-	                	console.log(y);
+	                	key = $.makeArray(item);
+	                	val = $.makeArray(key[1]);
+	              		name = val[name_idx];
+	              		email= val[email_idx];
+	                	console.log("name=" + name + ", email=" + email);
 	                    return {
 	                    	
 	                        // following property gets displayed in drop down
