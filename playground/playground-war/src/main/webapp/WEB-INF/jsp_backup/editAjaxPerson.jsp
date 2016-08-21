@@ -8,33 +8,13 @@
 <head>
 <title><spring:message code="global.createPerson" /></title>
 
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDtwepldqpFwcN9nq6gpdEjyPRrhxDshkw"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/geolocate.js"></script>
-
-<style type="text/css" media="screen">
-      .map_canvas { float: left; }
-      form { width: 300px; float: left; }
-      fieldset { width: 320px; margin-top: 20px}
-      fieldset label { display: block; margin: 0.5em 0 0em; }
-      fieldset input { width: 95%; }
-    </style>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/playground.js"></script>
 
 <link href="<%=request.getContextPath()%>/style/common.css" type="text/css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/style/jquery-ui.css" type="text/css" rel="stylesheet" />
 
-<script>
-      $(function(){
-        $("#geocomplete").geocomplete({
-          map: ".map_canvas",
-          details: "form",
-          types: ["geocode", "establishment"],
-        });
-
-        $("#find").click(function(){
-          $("#geocomplete").trigger("geocode");
-        });
-      });
-    </script>
 
 
 </head>
@@ -61,7 +41,8 @@
 			<!------------------------------ PERSON ---------------------------------------------------------------->
 			<!------------------------------------------------------------------------------------------------------>
 			<tr>
-				<th><spring:message code="global.person.firstName" /></th>
+				<th><label for="fName"><spring:message
+							code="global.person.firstName" /></label></th>
 				<td><form:input path="person.firstName" id="fName" /></td>
 			</tr>
 

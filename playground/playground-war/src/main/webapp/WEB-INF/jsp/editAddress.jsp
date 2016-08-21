@@ -41,46 +41,24 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-
-	<h2 class="underline">
+	
+	<input id="geocomplete" type="text" placeholder="Find a venue" value="" />
+    <input id="find" type="button" value="find" />
+	
+	<h2 class="underline"> 	
 
 		<c:choose>
-			<c:when test="${editPersonBean.person.id > 0}">
-				<spring:message code="editPerson.title.update" />
+			<c:when test="${editAddressBean.address.id > 0}">
+				Update Address
 			</c:when>
 			<c:otherwise>
-				<spring:message code="editPerson.title.create" />
+				Create Address
 			</c:otherwise>
 		</c:choose>
 	</h2>
-	<form:form commandName="editPersonBean">
-		<form:hidden path="person.id" />
+	<form:form commandName="editAddressBean">
+		<form:hidden path="address.id" />
 		<table class="formTable">
-
-			<!------------------------------------------------------------------------------------------------------>
-			<!------------------------------ PERSON ---------------------------------------------------------------->
-			<!------------------------------------------------------------------------------------------------------>
-			<tr>
-				<th><spring:message code="global.person.firstName" /></th>
-				<td><form:input path="person.firstName" id="fName" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.person.lastName" /></th>
-				<td><form:input path="person.lastName" id="lName" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.person.email" /></th>
-				<td><form:input path="person.email" id="email" /></td>
-				<td><form:errors path="person.email" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.person.phone" /></th>
-				<td><form:input path="person.phoneNr" id="phone" /></td>
-				<td><form:errors path="person.phoneNr" cssClass="errors" /></td>
-			</tr>
 
 			<!-------------------------------------------------------------------------------------------------->
 			<!------------------------------ ADDRESS ----------------------------------------------------------->
@@ -88,53 +66,36 @@
 
 			<tr>
 				<th><spring:message code="global.address.street" /></th>
-				<td><form:input path="person.address.street" id="street" /></td>
-				<td><form:errors path="person.address.street" cssClass="errors" /></td>
+				<td><form:input path="address.street" id="street" /></td>
+				<td><form:errors path="address.street" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.zipcode" /></th>
-				<td><form:input path="person.address.zipCode" id="zipCode" /></td>
-				<td><form:errors path="person.address.zipCode"
+				<td><form:input path="address.zipCode" id="zipCode" /></td>
+				<td><form:errors path="address.zipCode"
 						cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.city" /></th>
-				<td><form:input path="person.address.city" id="city" /></td>
-				<td><form:errors path="person.address.city" cssClass="errors" /></td>
+				<td><form:input path="address.city" id="city" /></td>
+				<td><form:errors path="address.city" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.stateOrRegion" /></th>
-				<td><form:input path="person.address.stateOrRegion" /></td>
-				<td><form:errors path="person.address.stateOrRegion"
+				<td><form:input path="address.stateOrRegion" /></td>
+				<td><form:errors path="address.stateOrRegion"
 						cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.country" /></th>
-				<td><form:input path="person.address.country" id="country" /></td>
-				<td><form:errors path="person.address.country"
-						cssClass="errors" /></td>
+				<td><form:input path="address.country" id="country" /></td>
+				<td><form:errors path="address.country" cssClass="errors" /></td>
 			</tr>
-			<!-------------------------------------------------------------------------------------------------->
-			<!------------------------------ PET --------------------------------------------------------------->
-			<!-------------------------------------------------------------------------------------------------->
-
-			<tr>
-				<th><spring:message code="global.pet.name" /></th>
-				<td><form:input path="person.pet.name" id="petName" /></td>
-				<td><form:errors path="person.pet.name" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.pet.type" /></th>
-				<td><form:select path="person.pet.type">
-						<form:options />
-					</form:select></td>
-				<td><form:errors path="person.pet.type" cssClass="errors" /></td>
-			</tr>
+			
 
 			<!------------------------------------------------------------------------------------------------------>
 			<!------------------------------ END ------------------------------------------------------------------->
@@ -145,6 +106,7 @@
 				<td><c:set var="submitText">
 						<spring:message code="global.submit" />
 					</c:set> <input type="submit" value="${submitText}" /> <a
+					
 					href="<%=request.getContextPath()%>/index.html"><spring:message
 							code="global.cancel" /></a></td>
 				<td></td>
@@ -153,7 +115,7 @@
 	</form:form>
 
 
-
+	<div class="map_canvas"></div>
 
 
 </body>

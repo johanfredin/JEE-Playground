@@ -12,4 +12,7 @@
 	<jee:local-slsb id="personService"
 		jndi-name="java:global/playground/playground-jar/PersonServiceImpl"
 		business-interface="se.fredin.playground.services.PersonService" />
+	<jee:local-slsb id="addressService"
+		jndi-name="java:global/playground/playground-jar/AddressServiceImpl"
+		business-interface="se.fredin.playground.services.AddressService" />
 </beans>

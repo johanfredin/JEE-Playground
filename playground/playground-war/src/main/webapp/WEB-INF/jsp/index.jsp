@@ -23,6 +23,7 @@
 	</p>
 	
 	<table class="dataTable">
+		<!-- PERSONS -->
 		<tr>
 			<th><spring:message code="global.person.firstName"/></th>
 			<th><spring:message code="global.person.lastName"/></th>
@@ -35,6 +36,28 @@
 				<td>${person.lastName}</td>
 				<td>${person.email}</td>
 				<td><a href="<%=request.getContextPath()%>/editAjaxPerson/${person.id}.html"><img src="images/edit.png" ></a></td>
+			</tr>
+		</c:forEach>
+		
+		
+		
+		<!-- ADDRESSES -->
+		<tr>
+			<th><spring:message code="global.address.street" /></th>
+			<th><spring:message code="global.address.zipcode" /></th>
+			<th><spring:message code="global.address.city" /></th>
+			<th><spring:message code="global.address.stateOrRegion" /></th>
+			<th><spring:message code="global.address.country" /></th>
+			<th><spring:message code="global.edit"/></th>
+		</tr>
+		<c:forEach items="${addresses}" var="address">
+			<tr>
+				<td>${address.street}</td>
+				<td>${address.zipCode}</td>
+				<td>${address.city}</td>
+				<td>${address.stateOrRegion}</td>
+				<td>${address.country}</td>
+				<td><a href="<%=request.getContextPath()%>/editAddress/${address.id}.html"><img src="images/edit.png" ></a></td>
 			</tr>
 		</c:forEach>
 	</table>
