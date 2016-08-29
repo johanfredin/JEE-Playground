@@ -17,8 +17,6 @@ import org.junit.Test;
 import se.fredin.playground.TestFixture;
 import se.fredin.playground.domain.entitiy.Address;
 import se.fredin.playground.domain.entitiy.Person;
-import se.fredin.playground.domain.entitiy.Pet;
-import se.fredin.playground.domain.entitiy.PetType;
 
 public class PersonTest {
 	
@@ -34,7 +32,7 @@ public class PersonTest {
 	
 	@Test
 	public void testConstructor() {
-		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "", null, null);
+		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "", null);
 		assertEquals("Id should be 0", 0, person.getId());
 		assertEquals("First name should be", "Jon", person.getFirstName());
 		assertEquals("Last name should be", "Doe", person.getLastName());
@@ -44,11 +42,9 @@ public class PersonTest {
 	
 	@Test
 	public void testRoleAndEmail() {
-		Pet pet = TestFixture.getValidPet();
 		Address address = TestFixture.getValidAddress();
-		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "", address, pet);
+		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "", address);
 		assertEquals("Email should be JonDoe@doeman.com", "JonDoe@doeman.com", person.getEmail());
-		assertEquals("Pet type should be CAT", PetType.DOG, person.getPet().getType());
 	}
 	
 	@Test

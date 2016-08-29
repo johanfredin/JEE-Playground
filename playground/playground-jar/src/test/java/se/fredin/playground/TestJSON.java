@@ -27,7 +27,6 @@ public class TestJSON {
 		this.entities = new ArrayList<IdHolder>();
 		this.entities.addAll(TestFixture.getValidPersons());
 		this.entities.add(TestFixture.getValidAddress());
-		this.entities.add(TestFixture.getValidPet());
 		this.jsonString = null;
 		this.mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 	}

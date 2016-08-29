@@ -48,9 +48,7 @@ public class Person extends AbstractEntity {
 	@JsonManagedReference
 	private Address address;
 	
-	@JsonManagedReference
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
-	private Pet pet;
+	
 	
 	/**
 	 * Default constructor
@@ -96,17 +94,6 @@ public class Person extends AbstractEntity {
 		this(firstName, lastName, email, phoneNr, null);
 	}
 	
-	/**
-	 * Create a new {@link Person} instance passing in all fields of this class
-	 * @param firstName the first name of the {@link Person}
-	 * @param lastName the last name of the {@link Person}
-	 * @param email the email of the {@link Person}
-	 * @param address the {@link Address} of this {@link Person}
-	 * @param phoneNr the phone nr of the {@link Person}
-	 */
-	public Person(String firstName, String lastName, String email, String phoneNr, Address address) {
-		this(firstName, lastName, email, phoneNr, address, null);
-	}
 	
 	/**
 	 * Create a new {@link Person} instance passing in all fields of this class
@@ -114,16 +101,14 @@ public class Person extends AbstractEntity {
 	 * @param lastName the last name of the {@link Person}
 	 * @param email the email of the {@link Person}
 	 * @param address the {@link Address} of this {@link Person}
-	 * @param pet {@link Pet} assigned this {@link Person}
 	 * 
 	 */
-	public Person(String firstName, String lastName, String email, String phoneNr, Address address, Pet pet) {
+	public Person(String firstName, String lastName, String email, String phoneNr, Address address) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
 		setPhoneNr(phoneNr);
 		setAddress(address);
-		setPet(pet);
 	}
 	
 	@Override
@@ -176,14 +161,6 @@ public class Person extends AbstractEntity {
 		return address;
 	}
 	
-	public void setPet(Pet pet) {
-		this.pet = pet;
-	}
-	
-	public Pet getPet() {
-		return pet;
-	}
-	
 	@Override
 	public void copyDataFromEntity(IdHolder populatedEntity) {
 		Person populaterPerson = (Person) populatedEntity;
@@ -193,7 +170,6 @@ public class Person extends AbstractEntity {
 		setLastName(populaterPerson.getLastName());
 		setPhoneNr(populaterPerson.getPhoneNr());
 		setAddress(populaterPerson.getAddress());
-		setPet(populaterPerson.getPet());
 	}
 	
 	@Override
@@ -208,9 +184,6 @@ public class Person extends AbstractEntity {
 
 	@Override
 	public void setRelations() {
-		if(getPet() != null) {
-			getPet().setPerson(this);
-		}
 		
 		if(getAddress() != null) {
 			getAddress().setPerson(this);

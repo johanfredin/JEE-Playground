@@ -19,7 +19,7 @@
 
         $("#geocomplete").geocomplete({
           map: ".map_canvas",
-          details: this,
+          details: "body",
           types: ["geocode", "establishment"],
         });
 
