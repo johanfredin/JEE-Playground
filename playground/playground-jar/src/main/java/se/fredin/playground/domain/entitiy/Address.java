@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -17,7 +18,7 @@ import se.fredin.playground.domain.IdHolder;
 
 
 @Entity
-@Table(name = "ADDRESS")
+@Table(name = "ADDRESS", uniqueConstraints=@UniqueConstraint(columnNames={"STREET", "CITY", "COUNTRY"}))
 public class Address extends AbstractEntity {
 	
 	private static final long serialVersionUID = 2582703777627336786L;
