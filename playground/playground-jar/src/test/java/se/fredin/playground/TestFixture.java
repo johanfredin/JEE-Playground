@@ -54,6 +54,9 @@ public class TestFixture {
 	// ------------------------------ ADDRESS --------------------------------------------------------------------------------
 	// -----------------------------------------------------------------------------------------------------------------------
 	
+	/**
+	 * @return street="Street", city="City", zipCode="Zippie", stateOrRegion="Region"
+	 */
 	public static Address getValidAddress() {
 		return getValidAddress("Street", "City", "Zippie", "Region");
 	}

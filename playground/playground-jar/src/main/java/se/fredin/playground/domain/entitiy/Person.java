@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -46,13 +46,16 @@ public class Person extends AbstractEntity {
 	private String phoneNr;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
+	@NotNull
 	@JsonManagedReference
 	private Address address;
 	
 	/**
 	 * Default constructor
 	 */
-	public Person() {}
+	public Person() {
+		this("", "", "", "", null);
+	}
 	
 	/**
 	 * Create a new {@link Person} instance passing in email and role
@@ -174,11 +177,20 @@ public class Person extends AbstractEntity {
 	@Override
 	public String toString() {
 		return new StringBuilder()
-				.append("First name=").append(this.firstName).append('\n')
-				.append("Last name=").append(this.lastName).append('\n')
-				.append("Email=").append(this.email).append('\n')
-				.append("Phone=").append(this.phoneNr).append('\n')
-				.toString();
+			.append("First name=").append(this.firstName).append('\n')
+			.append("Last name=").append(this.lastName).append('\n')
+			.append("Email=").append(this.email).append('\n')
+			.append("Phone=").append(this.phoneNr).append('\n')
+			.toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Person other = (Person) obj;
+		boolean addressEquals = other.getAddress() == null ? false : this.address.equals(other.getAddress()); 
+		return strEq(this.email, other.getEmail()) &&
+			   strEq(this.phoneNr, other.getPhoneNr()) &&
+			   addressEquals;
 	}
 
 	@Override
