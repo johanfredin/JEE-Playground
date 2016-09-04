@@ -32,11 +32,9 @@
 // 		$("#gmapStateOrRegion").val($("#stateOrRegion").val());
 // 		$("#gmapCountry").val($("#country").val());
 
-
-        
         $("#geocomplete").geocomplete({
           map: ".map_canvas",
-          details: "form:form",
+          details: "maForm",
           types: ["geocode", "establishment"],
         });
 
@@ -76,13 +74,14 @@
 			</c:otherwise>
 		</c:choose>
 	</h2>
-	<form:form commandName="editAddressBean">
+	<form:form modelAttribute="editAddressBean" id="maForm">
 		<form:hidden path="address.id" />
 		<table class="formTable">
 
 			<!-------------------------------------------------------------------------------------------------->
 			<!------------------------------ ADDRESS ----------------------------------------------------------->
 			<!-------------------------------------------------------------------------------------------------->
+			
 			<tr>
 				<th><spring:message code="global.address.street" /></th>
 				<td><form:input path="address.street" name="route" id="street" /></td>
