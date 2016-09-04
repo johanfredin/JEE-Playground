@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import se.fredin.playground.domain.entitiy.AbstractEntity;
 import se.fredin.playground.domain.entitiy.Address;
 import se.fredin.playground.domain.entitiy.Person;
-import se.fredin.playground.domain.entitiy.Pet;
 
 /**
  * An interface for all entities that can return a long ID. This is supposed to
@@ -28,7 +27,6 @@ import se.fredin.playground.domain.entitiy.Pet;
 	 @Type(value=AbstractEntity.class),
 	 @Type(value=Address.class),
 	 @Type(value=Person.class),
-	 @Type(value=Pet.class)
 })
 public interface IdHolder extends Serializable {
 	

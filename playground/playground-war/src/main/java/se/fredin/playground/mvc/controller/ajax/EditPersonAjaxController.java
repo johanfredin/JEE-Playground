@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import se.fredin.playground.domain.entitiy.Address;
 import se.fredin.playground.domain.entitiy.Person;
 import se.fredin.playground.mvc.bean.EditPersonBean;
 import se.fredin.playground.services.PersonService;
@@ -37,15 +38,17 @@ public class EditPersonAjaxController {
 	@RequestMapping(value="/editAjaxPerson/{id}.html", method = RequestMethod.GET)
 	public ModelAndView index(@PathVariable long id) {
 		Person person = null;
+		Address address = null;
 		
 		if(id > 0) {
 			person = getPersonService().getEntity(id);
+			address = person.getAddress();
 		} else {
 			person = new Person();
+			address = new Address();
 		}
 		
-		EditPersonBean eridPersonBean = new EditPersonBean();
-		eridPersonBean.setPerson(person);
+		EditPersonBean eridPersonBean = new EditPersonBean(person, address);
 		ModelAndView mav = new ModelAndView("editAjaxPerson");
 		mav.addObject("editPersonBean", eridPersonBean);
 		return mav;
@@ -63,6 +66,7 @@ public class EditPersonAjaxController {
 		}
 		
 		Person person = editPersonBean.getPerson();
+		person.setAddress(editPersonBean.getAddress());
 		person.setRelations();
 		long personId = person.getId();
 		

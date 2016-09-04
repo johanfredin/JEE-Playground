@@ -16,8 +16,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 import se.fredin.playground.domain.entitiy.Address;
 import se.fredin.playground.domain.entitiy.Person;
-import se.fredin.playground.domain.entitiy.Pet;
-import se.fredin.playground.domain.entitiy.PetType;
 
 
 public class TestFixture {
@@ -32,15 +30,15 @@ public class TestFixture {
 	 * @return a new {@link Person} with all fields filled in with dummy values
 	 */
 	public static Person getValidPerson() {
-		return getValidPerson("Jon", "Doe", "jon.doe@dobi.com", "1234 531 341", getValidAddress(), getValidPet());
+		return getValidPerson("Jon", "Doe", "jon.doe@dobi.com", "1234 531 341", getValidAddress());
 	}
 	
 	public static Person getValidPerson2() {
-		return getValidPerson("Jane", "Doe", "jane.doe@dobi.com", "1234 666 341", getValidAddress("hagåkers", "mölndal", "43141", "västra götaland"), getValidPet("Blanca"));
+		return getValidPerson("Jane", "Doe", "jane.doe@dobi.com", "1234 666 341", getValidAddress("hagåkers", "mölndal", "43141", "västra götaland"));
 	}
 	
-	public static Person getValidPerson(String firstName, String lastName, String email, String phoneNr, Address address, Pet pet) {
-		return new Person(firstName, lastName, email, phoneNr, address, pet);
+	public static Person getValidPerson(String firstName, String lastName, String email, String phoneNr, Address address) {
+		return new Person(firstName, lastName, email, phoneNr, address);
 	}
 	
 	public static List<Person> getValidPersons() {
@@ -56,6 +54,9 @@ public class TestFixture {
 	// ------------------------------ ADDRESS --------------------------------------------------------------------------------
 	// -----------------------------------------------------------------------------------------------------------------------
 	
+	/**
+	 * @return street="Street", city="City", zipCode="Zippie", stateOrRegion="Region"
+	 */
 	public static Address getValidAddress() {
 		return getValidAddress("Street", "City", "Zippie", "Region");
 	}
@@ -64,17 +65,6 @@ public class TestFixture {
 		return new Address(street, city, zipCode, region, "");
 	}
 	
-	// -----------------------------------------------------------------------------------------------------------------------
-	// ------------------------------ Pet ------------------------------------------------------------------------------
-	// -----------------------------------------------------------------------------------------------------------------------
-	
-	public static Pet getValidPet() {
-		return new Pet(PetType.DOG, "Fido");
-	}
-	
-	public static Pet getValidPet(String name) {
-		return new Pet(PetType.CAT, name);
-	}
 	
 	@Deployment
 	public static Archive<?> createIntegrationTestArchive() {

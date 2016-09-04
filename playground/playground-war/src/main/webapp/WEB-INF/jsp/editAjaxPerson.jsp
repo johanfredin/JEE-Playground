@@ -63,11 +63,13 @@
 			<tr>
 				<th><spring:message code="global.person.firstName" /></th>
 				<td><form:input path="person.firstName" id="fName" /></td>
+				<td><form:errors path="person.firstName" id="fName" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.person.lastName" /></th>
 				<td><form:input path="person.lastName" id="lName" /></td>
+				<td><form:errors path="person.lastName" id="fName" /></td>
 			</tr>
 
 			<tr>
@@ -117,23 +119,6 @@
 				<td><form:input path="person.address.country" id="country" /></td>
 				<td><form:errors path="person.address.country"
 						cssClass="errors" /></td>
-			</tr>
-			<!-------------------------------------------------------------------------------------------------->
-			<!------------------------------ PET --------------------------------------------------------------->
-			<!-------------------------------------------------------------------------------------------------->
-
-			<tr>
-				<th><spring:message code="global.pet.name" /></th>
-				<td><form:input path="person.pet.name" id="petName" /></td>
-				<td><form:errors path="person.pet.name" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.pet.type" /></th>
-				<td><form:select path="person.pet.type">
-						<form:options />
-					</form:select></td>
-				<td><form:errors path="person.pet.type" cssClass="errors" /></td>
 			</tr>
 
 			<!------------------------------------------------------------------------------------------------------>

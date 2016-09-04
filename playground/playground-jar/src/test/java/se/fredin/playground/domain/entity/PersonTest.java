@@ -3,7 +3,7 @@ package se.fredin.playground.domain.entity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -17,8 +17,6 @@ import org.junit.Test;
 import se.fredin.playground.TestFixture;
 import se.fredin.playground.domain.entitiy.Address;
 import se.fredin.playground.domain.entitiy.Person;
-import se.fredin.playground.domain.entitiy.Pet;
-import se.fredin.playground.domain.entitiy.PetType;
 
 public class PersonTest {
 	
@@ -26,15 +24,15 @@ public class PersonTest {
 	public void testEmptyConstructor() {
 		Person person = new Person();
 		assertEquals("Id should be 0", 0, person.getId());
-		assertNull("First name should be null", person.getFirstName());
-		assertNull("Last name should be null", person.getLastName());
-		assertNull("email should be null", person.getEmail());
-		assertNull("phone nr should be null", person.getPhoneNr());
+		assertTrue("First name should be empty", person.getFirstName().isEmpty());
+		assertTrue("Last name should be empty", person.getLastName().isEmpty());
+		assertTrue("email should be empty", person.getEmail().isEmpty());
+		assertTrue("phone nr should be empty", person.getPhoneNr().isEmpty());
 	}
 	
 	@Test
 	public void testConstructor() {
-		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "", null, null);
+		Person person = TestFixture.getValidPerson("Jon", "Doe", "", "", null);
 		assertEquals("Id should be 0", 0, person.getId());
 		assertEquals("First name should be", "Jon", person.getFirstName());
 		assertEquals("Last name should be", "Doe", person.getLastName());
@@ -44,11 +42,9 @@ public class PersonTest {
 	
 	@Test
 	public void testRoleAndEmail() {
-		Pet pet = TestFixture.getValidPet();
 		Address address = TestFixture.getValidAddress();
-		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "", address, pet);
+		Person person = TestFixture.getValidPerson("", "", "JonDoe@doeman.com", "", address);
 		assertEquals("Email should be JonDoe@doeman.com", "JonDoe@doeman.com", person.getEmail());
-		assertEquals("Pet type should be CAT", PetType.DOG, person.getPet().getType());
 	}
 	
 	@Test
@@ -60,6 +56,27 @@ public class PersonTest {
 		Validator validator = getValidator();
 		Set<ConstraintViolation<Person>> violations = validator.validate(person);
 		assertFalse(violations.isEmpty());
+	}
+	
+	@Test
+	public void testEquals() {
+		Address address1 = TestFixture.getValidAddress();
+		Address address2 = TestFixture.getValidAddress();
+		
+		address2.setId(2L);
+		address2.setZipCode("Zip2");
+		address2.setStateOrRegion("Region2");
+		
+		assertTrue("Address1 should still equal Address2", address1.equals(address2));
+		
+		address2.setCity("Another City");
+		assertFalse("Address1 should no longer equal Address2", address1.equals(address2));
+		
+		address2.setCity(address1.getCity());
+		assertTrue("Address1 should now equal Address2", address1.equals(address2));
+		
+		address2.setCountry("Another Country");
+		assertFalse("Address1 should no longer equal Address2", address1.equals(address2));
 	}
 	
 	protected Validator getValidator() {

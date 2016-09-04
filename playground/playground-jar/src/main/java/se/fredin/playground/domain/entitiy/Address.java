@@ -53,7 +53,9 @@ public class Address extends AbstractEntity {
 	/**
 	 * Construct a new empty {@link Address} instance 
 	 */
-	public Address() {}
+	public Address() {
+		this("", "", "", "", "");
+	}
 	
 	/**
 	 * Construct a new {@link Address} instance
@@ -161,6 +163,14 @@ public class Address extends AbstractEntity {
 			append("State/Region=").append(this.stateOrRegion).append(newLine).
 			append("Country=").append(this.country).append(newLine).
 			toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Address other = (Address) obj;
+		return strEq(this.street, other.getStreet()) &&
+			   strEq(this.city, other.getCity()) &&
+			   strEq(this.country, other.getCountry());
 	}
 
 	@Override

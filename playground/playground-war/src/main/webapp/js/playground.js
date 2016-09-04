@@ -23,7 +23,6 @@ $(document).ready(function() {
 								lastName: person.lastName,
 								email: person.email,
 								phone: person.phoneNr,
-								pet: person.pet,
 								address: person.address,
 				 	        }
 		 	            }));
@@ -38,7 +37,6 @@ $(document).ready(function() {
 			    $("#email").val(ui.item.email).css("background-color", "yellow");
 			    $("#phone").val(ui.item.phone).css("background-color", "yellow");
 			    $("#country").val(ui.item.address.country).css("background-color", "yellow");
-			    $("#petName").val(ui.item.pet.name).css("background-color", "yellow");
 		   }
 		});
 		

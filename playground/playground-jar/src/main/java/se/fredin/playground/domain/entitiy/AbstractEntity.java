@@ -58,6 +58,18 @@ public abstract class AbstractEntity implements IdHolder {
 		return id > 0;
 	}
 	
+	/**
+	 * Helper method for Entities overriding the {@link #equals(Object)} method
+	 * It uses trim and equalsignorecase on the passed in fields
+	 * @param ourField
+	 * @param otherField
+	 * @return <code>true</code> if <b>ourField.trim().equalsIgnoreCase(otherField.trim();</b>
+	 */
+	@JsonIgnore
+	public boolean strEq(String ourField, String otherField) {
+		return ourField.trim().equalsIgnoreCase(otherField.trim());
+	}
+	
 	
 
 }

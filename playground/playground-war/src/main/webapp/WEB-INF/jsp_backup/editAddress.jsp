@@ -17,14 +17,31 @@
 <script>
       $(function(){
 
+		// Start by retrieving the data from DB (if any)
+		$("#gmapStreet").val($("#street").val());
+		$("#gmapZipCode").val($("#zipCode").val());
+		$("#gmapCity").val($("#city").val());
+		$("#gmapStateOrRegion").val($("#stateOrRegion").val());
+		$("#gmapCountry").val($("#country").val());
+
         $("#geocomplete").geocomplete({
           map: ".map_canvas",
-          details: "body",
+          details: "form",
           types: ["geocode", "establishment"],
         });
 
         $("#find").click(function(){
           $("#geocomplete").trigger("geocode");
+        });
+
+		// Takes in all values from google map autocomplete and transfers to our JPA entity
+        $("#submitButton").on("click", function(){
+			$("#street").val($("#gmapStreet").val());
+			$("#zipCode").val($("#gmapZipCode").val());
+			$("#city").val($("#gmapCity").val());
+			$("#stateOrRegion").val($("#gmapStateOrRegion").val());
+			$("#country").val($("#gmapCountry").val());
+      		alert("its so easy baby!");  
         });
         
       });
@@ -34,7 +51,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-	dsdsd
+	
 	<input id="geocomplete" type="text" placeholder="Find a venue" value="" />
     <input id="find" type="button" value="find" />
 	
@@ -58,33 +75,39 @@
 			<!-------------------------------------------------------------------------------------------------->
 			<tr>
 				<th><spring:message code="global.address.street" /></th>
-				<td><form:input path="address.street" id="route" /></td>
+				<td><input name="route" type="text" id="gmapStreet"></td>
+				<td><form:hidden path="address.street" id="street" /></td>
 				<td><form:errors path="address.street" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.zipcode" /></th>
-				<td><form:input path="address.zipCode" id="postal_code" /></td>
+				<td> <input name="postal_code" type="text" id="gmapZipCode"></td>
+				<td><form:hidden path="address.zipCode" id="zipCode" /></td>
 				<td><form:errors path="address.zipCode" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.city" /></th>
-				<td><form:input path="address.city" id="locality" /></td>
+				<td><input name="locality" type="text" id="gmapCity"></td>
+				<td><form:input path="address.city" id="city" /></td>
 				<td><form:errors path="address.city" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.stateOrRegion" /></th>
-				<td><form:input path="address.stateOrRegion" id="administrative_area_level_1" /></td>
+				<td><input name="administrative_area_level_1" type="text" id="gmapStateOrRegion"></td>
+				<td><form:input path="address.stateOrRegion" id="stateOrRegion" /></td>
 				<td><form:errors path="address.stateOrRegion" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.address.country" /></th>
+				<td><input name="country" type="text" id="gmapCountry"></td>
 				<td><form:input path="address.country" id="country"/></td>
 				<td><form:errors path="address.country" cssClass="errors" /></td>
 			</tr>
+			
 			
 			<!------------------------------------------------------------------------------------------------------>
 			<!------------------------------ END ------------------------------------------------------------------->

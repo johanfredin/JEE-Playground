@@ -42,7 +42,7 @@
     country: null,
     map: false,
     details: false,
-    detailsAttribute: "name",
+    detailsAttribute: "id",
     detailsScope: null,
     autoselect: true,
     location: false,

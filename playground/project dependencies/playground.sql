@@ -5,4 +5,8 @@ CREATE SCHEMA `playground-test`;
 
 select * from playground.PERSON where FIRST_NAME like 'J%';
 
+select * from PERSON;
+
+select FIRST_NAME from playground.PERSON where FIRST_NAME like 'J%';
+
 select * from playground.PERSON;
