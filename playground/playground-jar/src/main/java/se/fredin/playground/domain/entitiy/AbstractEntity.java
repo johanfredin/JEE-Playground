@@ -16,12 +16,6 @@ public abstract class AbstractEntity implements IdHolder {
 	private static final long serialVersionUID = -3025466194050844855L;
 	
 	/**
-	 * Set the id of this {@link IdHolder}
-	 * @param id
-	 */
-	public abstract void setId(long id);
-
-	/**
 	 * Intended to be used for copying the fields from the populatedEntity
 	 * @param populatedEntity the {@link IdHolder} with the data
 	 */
@@ -60,7 +54,7 @@ public abstract class AbstractEntity implements IdHolder {
 	
 	/**
 	 * Helper method for Entities overriding the {@link #equals(Object)} method
-	 * It uses trim and equalsignorecase on the passed in fields
+	 * It uses trim and ignore case on the passed in fields
 	 * @param ourField
 	 * @param otherField
 	 * @return <code>true</code> if <b>ourField.trim().equalsIgnoreCase(otherField.trim();</b>
@@ -70,6 +64,25 @@ public abstract class AbstractEntity implements IdHolder {
 		return ourField.trim().equalsIgnoreCase(otherField.trim());
 	}
 	
+	@JsonIgnore
+	public String strSqueze(String value) {
+		return value.replace(" ", "").trim();
+	}
+	
+	/**
+	 * Custom implementation of the {@link #equals(Object)} method.
+	 * This equals method first tries to compare the {@link #getUniqueId()} of this instance with the object to compare against.
+	 * If {@link #getUniqueId()} == null the standard {@link #equals(Object)} method will be called
+	 * This one compares {@link #uniqueId}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		AbstractEntity other = (AbstractEntity) obj;
+		if(this.getUniqueId() == null) {
+			return super.equals(other);
+		}
+		return other.getUniqueId().equalsIgnoreCase(this.getUniqueId());
+	}
 	
 
 }

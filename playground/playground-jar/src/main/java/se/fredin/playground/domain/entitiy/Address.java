@@ -166,16 +166,10 @@ public class Address extends AbstractEntity {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		Address other = (Address) obj;
-		return strEq(this.street, other.getStreet()) &&
-			   strEq(this.city, other.getCity()) &&
-			   strEq(this.country, other.getCountry());
-	}
-
-	@Override
 	public void setRelations() {
-		getPerson().setAddress(this);
+		if(getPerson() != null) {
+			getPerson().setAddress(this);
+		}
 	}
 
 	@Override
@@ -188,6 +182,11 @@ public class Address extends AbstractEntity {
 		setStreet(populatedAddres.getStreet());
 		setZipCode(populatedAddres.getZipCode());
 		setPerson(populatedAddres.getPerson());
+	}
+
+	@Override
+	public String getUniqueId() {
+		return super.strSqueze((this.street + this.city + this.country));
 	}
 	
 

@@ -1,5 +1,8 @@
 package se.fredin.playground.services;
 
+import java.util.List;
+import java.util.Set;
+
 import se.fredin.playground.domain.IdHolder;
 import se.fredin.playground.repository.BaseRepository;
 
@@ -51,5 +54,9 @@ public interface ServiceBase<E extends IdHolder, F extends BaseRepository<E>> {
 	 */
 	void deleteEntity(E entity);
 	
+	/**
+	 * @return a {@link List} with all the each identities unique id
+	 */
+	Set<String> getUniqueIds();
 	
 }

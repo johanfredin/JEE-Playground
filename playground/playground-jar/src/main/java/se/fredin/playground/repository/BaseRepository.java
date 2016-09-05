@@ -37,5 +37,4 @@ public interface BaseRepository<E extends IdHolder> {
 	 */
 	void update(E entity);
 	
-
 }

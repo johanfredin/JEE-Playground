@@ -42,8 +42,11 @@ public interface IdHolder extends Serializable {
 	long getId();
 	
 	/**
-	 * Intended to be used for copying the fields from the populatedEntity
-	 * @param populatedEntity the {@link IdHolder} with the data
+	 * Should be used to determine what makes an entity unique, whereas {@link #getId()} returns the
+	 * numeric identity (which is also unique) this one could be used when submitting a form to tell
+	 * if that email already exist or that adress is taken to another venue etc
+	 * @return whatever the class implementing this interface deems as qualifier for making this implementation unique
 	 */
-	void copyDataFromEntity(IdHolder populatedEntity);
+	String getUniqueId();
+	
 }

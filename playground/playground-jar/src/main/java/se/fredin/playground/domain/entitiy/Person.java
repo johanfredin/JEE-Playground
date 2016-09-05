@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -46,7 +45,6 @@ public class Person extends AbstractEntity {
 	private String phoneNr;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="person", fetch=FetchType.LAZY, orphanRemoval=true)
-	@NotNull
 	@JsonManagedReference
 	private Address address;
 	
@@ -185,20 +183,15 @@ public class Person extends AbstractEntity {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		Person other = (Person) obj;
-		boolean addressEquals = other.getAddress() == null ? false : this.address.equals(other.getAddress()); 
-		return strEq(this.email, other.getEmail()) &&
-			   strEq(this.phoneNr, other.getPhoneNr()) &&
-			   addressEquals;
+	public String getUniqueId() {
+		return super.strSqueze((this.email + this.phoneNr + (this.address == null ? "" : this.address.getUniqueId())));
 	}
-
+	
 	@Override
 	public void setRelations() {
-		
 		if(getAddress() != null) {
 			getAddress().setPerson(this);
 		}
 	}
-	
+
 }

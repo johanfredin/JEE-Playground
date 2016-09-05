@@ -5,10 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Set;
-
 import javax.validation.Configuration;
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
@@ -47,20 +44,21 @@ public class PersonTest {
 		assertEquals("Email should be JonDoe@doeman.com", "JonDoe@doeman.com", person.getEmail());
 	}
 	
-	@Test
-	public void testPhoneNumber() {
-		
-		Person person = TestFixture.getValidPerson();
-		person.setEmail("");
-		person.setPhoneNr("abct");
-		Validator validator = getValidator();
-		Set<ConstraintViolation<Person>> violations = validator.validate(person);
-		assertFalse(violations.isEmpty());
-	}
+//	@Test
+//	public void testPhoneNumber() {
+//		
+//		Person person = TestFixture.getValidPerson();
+//		person.setEmail("");
+//		person.setPhoneNr("abct");
+//		Validator validator = getValidator();
+//		Set<ConstraintViolation<Person>> violations = validator.validate(person);
+//		assertFalse(violations.isEmpty());
+//	}
 	
 	@Test
 	public void testEquals() {
 		Address address1 = TestFixture.getValidAddress();
+		
 		Address address2 = TestFixture.getValidAddress();
 		
 		address2.setId(2L);

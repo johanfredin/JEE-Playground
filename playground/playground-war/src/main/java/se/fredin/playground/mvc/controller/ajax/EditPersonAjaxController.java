@@ -2,6 +2,7 @@ package se.fredin.playground.mvc.controller.ajax;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -85,6 +86,17 @@ public class EditPersonAjaxController {
 	public @ResponseBody List<Person> getMatchingFirstNames(@RequestParam("term") String query) {
 		List<Person> result = getPersonService().getAllPersonsWithFirstNameLike(query);
 		return result;
+	}
+	
+	@RequestMapping(value="/getUniqueIds", method=RequestMethod.GET)
+	public @ResponseBody Set<String> getUniqueIds(@RequestParam("term") String query) {
+		Set<String> result = getPersonService().getUniqueIds();
+		return result;
+	}
+	
+	@RequestMapping(value="/isUnique", method=RequestMethod.GET)
+	public @ResponseBody boolean isUnique(@RequestParam("term") String query) {
+		return getPersonService().getUniqueIds().contains(query);
 	}
 	
 	public void setPersonService(PersonService personService) {

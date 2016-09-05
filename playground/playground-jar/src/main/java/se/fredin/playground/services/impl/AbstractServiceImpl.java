@@ -27,5 +27,4 @@ public abstract class AbstractServiceImpl<E extends IdHolder, F extends BaseRepo
 		getRepository().remove(entity);
 	}
 	
-
 }

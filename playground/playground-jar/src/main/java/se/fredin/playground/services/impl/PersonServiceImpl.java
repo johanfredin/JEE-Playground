@@ -1,7 +1,9 @@
 package se.fredin.playground.services.impl;
 
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -39,6 +41,14 @@ public class PersonServiceImpl extends AbstractServiceImpl<Person, PersonReposit
 	@Override
 	public List<Person> getAllPersonsWithFirstNameLike(String firstName, int maxResults) {
 		return personRepository.getAllPersonsWithFirstNameLike(firstName, maxResults);
+	}
+	@Override
+	public Set<String> getUniqueIds() {
+		Set<String> uniqueIds = new HashSet<String>();
+		for(Person person : getAllPersons()) {
+			uniqueIds.add(person.getUniqueId());
+		}
+		return uniqueIds;
 	}
 	
 
