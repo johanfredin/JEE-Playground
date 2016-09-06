@@ -8,33 +8,36 @@
 <head>
 <title><spring:message code="global.createPerson" /></title>
 
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDtwepldqpFwcN9nq6gpdEjyPRrhxDshkw"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/geolocate.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<style type="text/css" media="screen">
-      .map_canvas { float: left; }
-      form { width: 300px; float: left; }
-      fieldset { width: 320px; margin-top: 20px}
-      fieldset label { display: block; margin: 0.5em 0 0em; }
-      fieldset input { width: 95%; }
-    </style>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+
 
 <link href="<%=request.getContextPath()%>/style/common.css" type="text/css" rel="stylesheet" />
 
-<script>
-      $(function(){
-        $("#geocomplete").geocomplete({
-          map: ".map_canvas",
-          details: "form",
-          types: ["geocode", "establishment"],
-        });
+<script type="text/javascript">
 
-        $("#find").click(function(){
-          $("#geocomplete").trigger("geocode");
-        });
-      });
-    </script>
+	$(function(){
+
+		var source = "http://localhost:8080/playground";
+		
+		$("#country").on("change", function(request, response){
+		    $.ajax({
+		       	url: source + "/isUnique",
+		      	dataType: "json",
+		       	data: {
+		          	term: $("#country").val()
+		      	},
+		       	success: function( data ) {
+		       		console.log(data);
+		       		console.log(response);
+		       	}
+		    });
+		});
+	});
+
+</script>
 
 
 </head>
@@ -43,6 +46,9 @@
 	<jsp:include page="header.jsp" />
 
 	<h2 class="underline">
+
+
+
 
 		<c:choose>
 			<c:when test="${editPersonBean.person.id > 0}">

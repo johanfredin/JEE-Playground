@@ -96,7 +96,8 @@ public class EditPersonAjaxController {
 	
 	@RequestMapping(value="/isUnique", method=RequestMethod.GET)
 	public @ResponseBody boolean isUnique(@RequestParam("term") String query) {
-		return getPersonService().getUniqueIds().contains(query);
+		Set<String> uniqueIds = getPersonService().getUniqueIds();
+		return uniqueIds.contains(query);
 	}
 	
 	public void setPersonService(PersonService personService) {
