@@ -184,10 +184,5 @@ public class Address extends AbstractEntity {
 		setPerson(populatedAddres.getPerson());
 	}
 
-	@Override
-	public String getUniqueId() {
-		return super.strSqueze((this.street + this.city + this.country));
-	}
-	
 
 }

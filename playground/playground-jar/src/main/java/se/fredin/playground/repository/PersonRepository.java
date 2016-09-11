@@ -27,4 +27,9 @@ public interface PersonRepository extends BaseRepository<Person> {
 	 */
 	List<Person> getAllPersonsWithFirstNameLike(String firstName, int maxResults);
 	
+	List<String> getExistingEmails(Person person);
+	
+	List<String> getExistingPhoneNrs(Person person);
+	
+	
 }

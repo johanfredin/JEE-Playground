@@ -30,7 +30,26 @@ public class JpaPersonRepository extends JpaRepository<Person> implements Person
 		query.setMaxResults(maxResults);
 		return query.getResultList();
 	}
+	
+	// select * from PERSON WHERE EMAIL = 'johanfredin205@gmail.com' and PERSON_ID != 1 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getExistingEmails(Person person) {
+		Query query = em.createQuery("select p.email from Person p where p.email=:email and p.id !=:id");
+		query.setParameter("email", person.getEmail());
+		query.setParameter("id", person.getId());
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getExistingPhoneNrs(Person person) {
+		Query query = em.createQuery("select p.phoneNr from Person p where p.phoneNr=:phoneNr and p.id !=:id");
+		query.setParameter("phoneNr", person.getPhoneNr());
+		query.setParameter("id", person.getId());
+		return query.getResultList();
+	}
 
 	
-
 }

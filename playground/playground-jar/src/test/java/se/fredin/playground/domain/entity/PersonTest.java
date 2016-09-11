@@ -2,7 +2,6 @@ package se.fredin.playground.domain.entity;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import javax.validation.Configuration;
@@ -54,28 +53,6 @@ public class PersonTest {
 //		Set<ConstraintViolation<Person>> violations = validator.validate(person);
 //		assertFalse(violations.isEmpty());
 //	}
-	
-	@Test
-	public void testEquals() {
-		Address address1 = TestFixture.getValidAddress();
-		
-		Address address2 = TestFixture.getValidAddress();
-		
-		address2.setId(2L);
-		address2.setZipCode("Zip2");
-		address2.setStateOrRegion("Region2");
-		
-		assertTrue("Address1 should still equal Address2", address1.equals(address2));
-		
-		address2.setCity("Another City");
-		assertFalse("Address1 should no longer equal Address2", address1.equals(address2));
-		
-		address2.setCity(address1.getCity());
-		assertTrue("Address1 should now equal Address2", address1.equals(address2));
-		
-		address2.setCountry("Another Country");
-		assertFalse("Address1 should no longer equal Address2", address1.equals(address2));
-	}
 	
 	protected Validator getValidator() {
 		Configuration<?> configure = Validation.byDefaultProvider().configure();

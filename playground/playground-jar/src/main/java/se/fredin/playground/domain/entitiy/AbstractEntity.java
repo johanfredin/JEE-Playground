@@ -69,20 +69,5 @@ public abstract class AbstractEntity implements IdHolder {
 		return value.replace(" ", "").trim();
 	}
 	
-	/**
-	 * Custom implementation of the {@link #equals(Object)} method.
-	 * This equals method first tries to compare the {@link #getUniqueId()} of this instance with the object to compare against.
-	 * If {@link #getUniqueId()} == null the standard {@link #equals(Object)} method will be called
-	 * This one compares {@link #uniqueId}
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		AbstractEntity other = (AbstractEntity) obj;
-		if(this.getUniqueId() == null) {
-			return super.equals(other);
-		}
-		return other.getUniqueId().equalsIgnoreCase(this.getUniqueId());
-	}
-	
 
 }

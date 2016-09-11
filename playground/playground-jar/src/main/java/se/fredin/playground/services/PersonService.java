@@ -18,4 +18,12 @@ public interface PersonService extends ServiceBase<Person, PersonRepository> {
 	
 	List<Person> getAllPersonsWithFirstNameLike(String firstName, int maxResults);
 	
+	List<String> getExistingEmails(Person person);
+	
+	List<String> getExistingPhoneNrs(Person person);
+	
+	boolean isUniqueEmail(Person person);
+	
+	boolean isUniquePhoneNr(Person person);
+	
 }

@@ -183,11 +183,6 @@ public class Person extends AbstractEntity {
 	}
 	
 	@Override
-	public String getUniqueId() {
-		return super.strSqueze((this.email + this.phoneNr + (this.address == null ? "" : this.address.getUniqueId())));
-	}
-	
-	@Override
 	public void setRelations() {
 		if(getAddress() != null) {
 			getAddress().setPerson(this);
