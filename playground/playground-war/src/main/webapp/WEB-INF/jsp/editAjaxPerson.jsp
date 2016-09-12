@@ -82,6 +82,7 @@
 				<th><spring:message code="global.person.email" /></th>
 				<td><form:input path="person.email" id="email" /></td>
 				<td><form:errors path="person.email" cssClass="errors" /></td>
+				<td><form:errors path="editPersonBean.isUniqueEmail" cssClass="errors" /></td>
 			</tr>
 
 			<tr>

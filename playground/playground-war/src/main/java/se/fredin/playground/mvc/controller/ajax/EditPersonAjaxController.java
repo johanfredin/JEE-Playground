@@ -48,36 +48,45 @@ public class EditPersonAjaxController {
 			address = new Address();
 		}
 		
-		EditPersonBean eridPersonBean = new EditPersonBean(person, address);
+		EditPersonBean editPersonBean = new EditPersonBean(person, address);
 		ModelAndView mav = new ModelAndView("editAjaxPerson");
-		mav.addObject("editPersonBean", eridPersonBean);
+		mav.addObject("editPersonBean", editPersonBean);
+		mav.addObject("isUniqueEmail", editPersonBean.isUniqueEmail());
 		return mav;
 	}
 	
 	@RequestMapping(value="/editAjaxPerson/{id}.html", method = RequestMethod.POST) 
 	public ModelAndView handleSubmit(@Valid EditPersonBean editPersonBean, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
+		Person person = editPersonBean.getPerson();
+		boolean isUniqueEmail = getPersonService().isUniqueEmail(person);
+		
+		if(bindingResult.hasErrors() || !isUniqueEmail) {
 			ModelAndView mav = new ModelAndView("editAjaxPerson");
 			mav.addObject("editPersonBean", editPersonBean);
-			for(ObjectError error : bindingResult.getAllErrors()) {
-				log.info("Error " + error.getCode() + " " + error.getDefaultMessage() + " " + error.getObjectName());
+			
+			// Add custom errors if any
+			if(!isUniqueEmail) {
+				bindingResult.addError(new ObjectError("editPersonBean.isUniqueEmail", new String[]{"isUniqueEmail"}, null, "Email already exists"));
 			}
+			for(ObjectError error : bindingResult.getAllErrors()) {
+				log.warning("Error " + error.getCode() + " " + error.getDefaultMessage() + " " + error.getObjectName());
+			}
+			
 			return mav;
 		}
 		
-		Person person = editPersonBean.getPerson();
+		
 		person.setAddress(editPersonBean.getAddress());
 		person.setRelations();
-		long personId = person.getId();
-		
-		if(personId > 0) {
-			Person dbPerson = getPersonService().getEntity(personId);
+			
+		if(person.isExistingEntity()) {
+			Person dbPerson = getPersonService().getEntity(person.getId());
 			dbPerson.copyDataFromEntity(person);
 			getPersonService().updateEntity(dbPerson);
 		} else {
 			getPersonService().createEntity(person);
 		}
-		
+			
 		return new ModelAndView("redirect:/index.html");
 	}
 	
