@@ -51,30 +51,30 @@ public class EditPersonAjaxController {
 		EditPersonBean editPersonBean = new EditPersonBean(person, address);
 		ModelAndView mav = new ModelAndView("editAjaxPerson");
 		mav.addObject("editPersonBean", editPersonBean);
-		mav.addObject("isUniqueEmail", editPersonBean.isUniqueEmail());
+		mav.addObject("isExistingEmail", false);
 		return mav;
 	}
 	
 	@RequestMapping(value="/editAjaxPerson/{id}.html", method = RequestMethod.POST) 
 	public ModelAndView handleSubmit(@Valid EditPersonBean editPersonBean, BindingResult bindingResult) {
 		Person person = editPersonBean.getPerson();
+		
 		boolean isUniqueEmail = getPersonService().isUniqueEmail(person);
 		
 		if(bindingResult.hasErrors() || !isUniqueEmail) {
 			ModelAndView mav = new ModelAndView("editAjaxPerson");
 			mav.addObject("editPersonBean", editPersonBean);
 			
-			// Add custom errors if any
 			if(!isUniqueEmail) {
-				bindingResult.addError(new ObjectError("editPersonBean.isUniqueEmail", new String[]{"isUniqueEmail"}, null, "Email already exists"));
+				mav.addObject("isExistingEmail", true);
 			}
+			
 			for(ObjectError error : bindingResult.getAllErrors()) {
 				log.warning("Error " + error.getCode() + " " + error.getDefaultMessage() + " " + error.getObjectName());
 			}
-			
+
 			return mav;
 		}
-		
 		
 		person.setAddress(editPersonBean.getAddress());
 		person.setRelations();

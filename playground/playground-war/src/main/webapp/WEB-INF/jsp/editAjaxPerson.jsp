@@ -69,20 +69,24 @@
 			<tr>
 				<th><spring:message code="global.person.firstName" /></th>
 				<td><form:input path="person.firstName" id="fName" /></td>
-				<td><form:errors path="person.firstName" id="fName" /></td>
+				<td><form:errors path="person.firstName" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.person.lastName" /></th>
 				<td><form:input path="person.lastName" id="lName" /></td>
-				<td><form:errors path="person.lastName" id="fName" /></td>
+				<td><form:errors path="person.lastName" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
 				<th><spring:message code="global.person.email" /></th>
 				<td><form:input path="person.email" id="email" /></td>
 				<td><form:errors path="person.email" cssClass="errors" /></td>
-				<td><form:errors path="editPersonBean.isUniqueEmail" cssClass="errors" /></td>
+				<c:choose>
+					<c:when test="${isExistingEmail}">
+						<td><font color="red">Email is not unique!</font></td>
+					</c:when>
+				</c:choose>
 			</tr>
 
 			<tr>
@@ -104,8 +108,7 @@
 			<tr>
 				<th><spring:message code="global.address.zipcode" /></th>
 				<td><form:input path="person.address.zipCode" id="zipCode" /></td>
-				<td><form:errors path="person.address.zipCode"
-						cssClass="errors" /></td>
+				<td><form:errors path="person.address.zipCode" cssClass="errors" /></td>
 			</tr>
 
 			<tr>
@@ -117,8 +120,7 @@
 			<tr>
 				<th><spring:message code="global.address.stateOrRegion" /></th>
 				<td><form:input path="person.address.stateOrRegion" /></td>
-				<td><form:errors path="person.address.stateOrRegion"
-						cssClass="errors" /></td>
+				<td><form:errors path="person.address.stateOrRegion" cssClass="errors" /></td>
 			</tr>
 
 			<tr>

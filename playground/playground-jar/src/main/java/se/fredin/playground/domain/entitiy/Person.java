@@ -32,7 +32,6 @@ public class Person extends AbstractEntity {
 	
 	@NotBlank
 	@Email
-	
 	@Column(name="EMAIL")
 	private String email;
 	

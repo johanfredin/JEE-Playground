@@ -20,8 +20,6 @@ public class EditPersonBean {
 	@Valid
 	private Address address;
 	
-	private boolean isUniqueEmail;
-	
 	public EditPersonBean() {}
 	
 	public EditPersonBean(@Valid Person person, @Valid Address address) {
@@ -45,12 +43,5 @@ public class EditPersonBean {
 		return address;
 	}
 	
-	public void setUniqueEmail(boolean isUniqueEmail) {
-		this.isUniqueEmail = isUniqueEmail;
-	}
-	
-	public boolean isUniqueEmail() {
-		return isUniqueEmail;
-	}
 	
 }
