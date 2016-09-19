@@ -1,7 +1,8 @@
-<%@ page contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="custom" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="customWithChoise" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <html>
@@ -48,8 +49,6 @@
 	<h2 class="underline">
 
 
-
-
 		<c:choose>
 			<c:when test="${editPersonBean.person.id > 0}">
 				<spring:message code="editPerson.title.update" />
@@ -61,80 +60,30 @@
 	</h2>
 	<form:form commandName="editPersonBean">
 		<form:hidden path="person.id" />
-		<table class="formTable">
 
 			<!------------------------------------------------------------------------------------------------------>
 			<!------------------------------ PERSON ---------------------------------------------------------------->
 			<!------------------------------------------------------------------------------------------------------>
-			<tr>
-				<th><spring:message code="global.person.firstName" /></th>
-				<td><form:input path="person.firstName" id="fName" /></td>
-				<td><form:errors path="person.firstName" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.person.lastName" /></th>
-				<td><form:input path="person.lastName" id="lName" /></td>
-				<td><form:errors path="person.lastName" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.person.email" /></th>
-				<td><form:input path="person.email" id="email" /></td>
-				<td><form:errors path="person.email" cssClass="errors" /></td>
-				<c:choose>
-					<c:when test="${isExistingEmail}">
-						<td><font color="red">Email is not unique!</font></td>
-					</c:when>
-				</c:choose>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.person.phone" /></th>
-				<td><form:input path="person.phoneNr" id="phone" /></td>
-				<td><form:errors path="person.phoneNr" cssClass="errors" /></td>
-			</tr>
+			
+			<custom:inputField label="global.person.firstName" name="person.firstName" id="fName"/>	
+			<custom:inputField label="global.person.lastName" name="person.lastName" id="lName"/>	
+			<custom:inputChoiseTag label="global.person.email" name="person.email" id="email" conditionViolated="${isExistingEmail}" errorMessage="Email is not unique!" />
+			<custom:inputField label="global.person.phone" name="person.phoneNr" id="phone"/>
 
 			<!-------------------------------------------------------------------------------------------------->
 			<!------------------------------ ADDRESS ----------------------------------------------------------->
 			<!-------------------------------------------------------------------------------------------------->
 
-			<tr>
-				<th><spring:message code="global.address.street" /></th>
-				<td><form:input path="person.address.street" id="street" /></td>
-				<td><form:errors path="person.address.street" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.address.zipcode" /></th>
-				<td><form:input path="person.address.zipCode" id="zipCode" /></td>
-				<td><form:errors path="person.address.zipCode" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.address.city" /></th>
-				<td><form:input path="person.address.city" id="city" /></td>
-				<td><form:errors path="person.address.city" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.address.stateOrRegion" /></th>
-				<td><form:input path="person.address.stateOrRegion" /></td>
-				<td><form:errors path="person.address.stateOrRegion" cssClass="errors" /></td>
-			</tr>
-
-			<tr>
-				<th><spring:message code="global.address.country" /></th>
-				<td><form:input path="person.address.country" id="country" /></td>
-				<td><form:errors path="person.address.country"
-						cssClass="errors" /></td>
-			</tr>
+			<custom:inputField label="global.address.street" name="person.address.street" id="street"/>
+			<custom:inputField label="global.address.zipcode" name="person.address.zipCode" id="zipCode"/>
+			<custom:inputField label="global.address.city" name="person.address.city" id="city"/>
+			<custom:inputField label="global.address.stateOrRegion" name="person.address.stateOrRegion"/>
+			<custom:inputField label="global.address.country" name="person.address.country" id="country"/>
 
 			<!------------------------------------------------------------------------------------------------------>
 			<!------------------------------ END ------------------------------------------------------------------->
 			<!------------------------------------------------------------------------------------------------------>
 
-			<tr>
 				<th></th>
 				<td><c:set var="submitText">
 						<spring:message code="global.submit" />
@@ -142,8 +91,6 @@
 					href="<%=request.getContextPath()%>/index.html"><spring:message
 							code="global.cancel" /></a></td>
 				<td></td>
-			</tr>
-		</table>
 	</form:form>
 
 
